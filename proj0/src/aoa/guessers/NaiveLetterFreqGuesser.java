@@ -2,9 +2,8 @@ package aoa.guessers;
 
 import aoa.utils.FileUtils;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Array;
+import java.util.*;
 
 public class NaiveLetterFreqGuesser implements Guesser {
     private final List<String> words;
@@ -22,9 +21,8 @@ public class NaiveLetterFreqGuesser implements Guesser {
     /** Returns a map from a given letter to its frequency across all words.
      *  This task is similar to something you did in hw0b! */
     public Map<Character, Integer> getFrequencyMap() {
-        Map<Character, Integer> freq = new HashMap<>();
+        Map<Character, Integer> freq = new TreeMap<>();
         for (String word : words) {
-            Integer count = 0;
             for (Character ch : word.toCharArray()) {
                 if (freq.containsKey(ch)) {
                     freq.put(ch, freq.get(ch)+1);
@@ -40,8 +38,18 @@ public class NaiveLetterFreqGuesser implements Guesser {
     /** Returns the most common letter in WORDS that has not yet been guessed
      *  (and therefore isn't present in GUESSES). */
     public char getGuess(List<Character> guesses) {
-        // TODO: Fill in this method.
-        return '?';
+        Map<Character, Integer> freq = getFrequencyMap();
+        /** List<Character> notGuesses = new ArrayList<Character>(); **/
+        Character prevMax = 'h';
+        for (Character key : freq.keySet()) {
+            if (freq.size() == 0) {
+                return '?';
+            }
+            else if (freq.get(key) > freq.get(prevMax) && guesses.contains(key) == false) {
+                prevMax = key;
+            }
+        }
+    return prevMax;
     }
 
     public static void main(String[] args) {
