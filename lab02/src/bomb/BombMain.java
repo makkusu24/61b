@@ -17,7 +17,15 @@ public class BombMain {
             b.phase1(IntList.of(0, 9, 3, 0, 8)); // Figure this out too
         }
         if (phase >= 2) {
-            String input = "test";
+            String input = "t";
+            for (int x = 0; x<1400; x++) {
+                if (x == 1337) {
+                    input = input + " -81201430";
+                }
+                else {
+                    input = input + " -81201430";
+                }
+            }
             b.phase2(input);
         }
     }
