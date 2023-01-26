@@ -40,7 +40,7 @@ public class NaiveLetterFreqGuesser implements Guesser {
     public char getGuess(List<Character> guesses) {
         Map<Character, Integer> freq = getFrequencyMap();
         /** List<Character> notGuesses = new ArrayList<Character>(); **/
-        Character prevMax = 'h';
+        Character prevMax = '|';
         for (Character key : freq.keySet()) {
             if (freq.size() == 0) {
                 return '?';

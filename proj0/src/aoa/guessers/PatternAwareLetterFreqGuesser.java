@@ -30,7 +30,18 @@ public class PatternAwareLetterFreqGuesser implements Guesser {
     /** Returns the most common letter in the set of valid words based on the current
      *  PATTERN. */
     public char getGuess(String pattern, List<Character> guesses) {
-        return guesses.get(1);
+        Map<Character, Integer> freq = getFrequencyMap();
+        /** List<Character> notGuesses = new ArrayList<Character>(); **/
+        Character prevMax = '|';
+        for (Character key : freq.keySet()) {
+            if (freq.size() == 0) {
+                return '?';
+            }
+            else if (freq.get(key) > freq.get(prevMax) && guesses.contains(key) == false) {
+                prevMax = key;
+            }
+        }
+        return prevMax;
     }
 
     public static void main(String[] args) {
