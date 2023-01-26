@@ -16,32 +16,32 @@ public class PatternAwareLetterFreqGuesser implements Guesser {
 
     /** @Override **/
     public Map<Character, Integer> getPatternFrequencyMap(String pattern) {
-        Map<Character, Integer> freq = new TreeMap<>();
-        List<String> patternWords = new ArrayList<>();
-        List<String> patternWords2 = new ArrayList<>();
-        char[] patternArray = pattern.toCharArray();
+        Map<Character, Integer> freq = new TreeMap<>(); //the frequency map we want to return
+        List<String> patternWords = new ArrayList<>(); //the list of words that match the length of the pattern
+        List<String> patternWords2 = new ArrayList<>(); //the words from patternWords that match the content of the pattern string
+        char[] patternArray = pattern.toCharArray(); //allows us to iterate over the pattern character by character (compatible types)
         /** the below 2 loops parses the viable words from the rest of the words list**/
         for (String element : words) {
             if (element.length() == pattern.length()) {
                 patternWords.add(element);
             }
         }
-        for (String element2 : patternWords) {
+        for (String element2 : patternWords) { //each same-length word checked
             Integer i = 0;
-            for (Character element3 : element2.toCharArray()) {
-                if (patternArray[i] == '-' && i == patternArray.length-1) {
+            for (Character element3 : element2.toCharArray()) { //each character in the same-length word checked
+                if (patternArray[i] == '-' && i == patternArray.length-1) { //end of pattern; last character is blank and a green light for a match
                     patternWords2.add(element2);
                 }
-                else if (patternArray[i] == '-') {
+                else if (patternArray[i] == '-') { //blank; continue with the loop
                     i++;
                 }
-                else if (i == patternArray.length-1 && patternArray[i] == element3){
+                else if (i == patternArray.length-1 && patternArray[i] == element3){ //end of pattern; last character is the same and a green light for a match
                     patternWords2.add(element2);
                 }
-                else if (patternArray[i] != element3) {
+                else if (patternArray[i] != element3) { //pattern is definitely not a match
                     break;
                 }
-                else {
+                else { //continue with the loop
                     i++;
                 }
             }
