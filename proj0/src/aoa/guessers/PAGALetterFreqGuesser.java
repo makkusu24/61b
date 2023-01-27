@@ -2,10 +2,7 @@ package aoa.guessers;
 
 import aoa.utils.FileUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class PAGALetterFreqGuesser implements Guesser {
     private final List<String> words;
@@ -18,14 +15,30 @@ public class PAGALetterFreqGuesser implements Guesser {
     public Map<Character, Integer> getPatternFrequencyMap(String pattern, List<Character> guesses) {
         Map<Character, Integer> freq = new TreeMap<>(); //the frequency map we want to return
         List<String> patternWords = new ArrayList<>(); //the list of words that match the length of the pattern
+        List<String> toRemove = new ArrayList<>();
         List<String> patternWords2 = new ArrayList<>(); //the words from patternWords that match the content of the pattern string
         char[] patternArray = pattern.toCharArray(); //allows us to iterate over the pattern character by character (compatible types)
         /** the below 2 loops parses the viable words from the rest of the words list**/
-        for (String element : words) { //ensures pattern length is the same as each word in the filtered list
+        for (String element : words) { //ensures pattern length is the same as each word in the filtered list; also checks PAGA[2] where it removes words that are (1) in guesses AND (2) not in the pattern
             if (element.length() == pattern.length()) {
                 patternWords.add(element);
             }
         }
+        for (Character squish : guesses) { //REMOVE all words that are in guesses but not in the pattern || NEW FROM PA --> PAGA
+                for (String squishWord : patternWords) {
+                    if (squishWord.contains(Character.toString(squish)) && Arrays.asList(patternArray).contains(squish) == false) { //if the pattern word contains a guess character AND the guess character is not present in the pattern, remove it
+                        toRemove.add(squishWord);
+                    }
+                }
+            }
+        patternWords.removeAll(toRemove);
+        /**for (Character squish : guesses) {
+            for (char squishPattern : patternArray) {
+                if (squishPattern != squish) {
+
+                }
+            }
+        }**/
         for (String element2 : patternWords) { //each same-length word checked
             Integer i = 0;
             for (Character element3 : element2.toCharArray()) { //each character in the same-length word checked against INDEXED PATTERN
@@ -57,7 +70,7 @@ public class PAGALetterFreqGuesser implements Guesser {
                 }
             }
         }
-        freq.put('z', 0);
+        freq.put('|', 0);
         return freq;
     }
     /** Returns the most common letter in the set of valid words based on the current
@@ -65,12 +78,12 @@ public class PAGALetterFreqGuesser implements Guesser {
     public char getGuess(String pattern, List<Character> guesses) {
         Map<Character, Integer> freq = getPatternFrequencyMap(pattern, guesses);
         /** List<Character> notGuesses = new ArrayList<Character>(); **/
-        Character prevMax = 'z';
-        for (Character key : freq.keySet()) {
-            if (freq.size() == 0) {
+        Character prevMax = '|'; // CHANGE CHANGE CHANGE
+        for (Character key : freq.keySet()) { //iterates over every key in the getPatternFrequencyMap() TreeMap (all the character frequencies from the remaining filtered word bank
+            if (freq.size() == 1) { //return '?' if there is no character array
                 return '?';
             }
-            else if (freq.get(key) > freq.get(prevMax) && guesses.contains(key) == false) {
+            else if (freq.get(key) > freq.get(prevMax) && guesses.contains(key) == false) { //if the currently checked letter is larger than the previous maximum and has not already been guessed, then it becomes the new maximum
                 prevMax = key;
             }
         }
