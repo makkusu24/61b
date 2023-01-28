@@ -32,6 +32,7 @@ public class NaiveLetterFreqGuesser implements Guesser {
                 }
             }
         }
+        freq.put('|', 0);
         return freq;
     }
 
