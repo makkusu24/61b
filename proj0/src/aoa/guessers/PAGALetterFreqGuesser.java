@@ -33,6 +33,16 @@ public class PAGALetterFreqGuesser implements Guesser {
                 }
             }
         }
+        for (Character g : guesses) {   //all the guesses
+            for (String word : patternWords) { //liable words
+                for (int c = 0; c<word.length(); c++) {
+                    if (word.charAt(c) == g && pattern.charAt(c) !=g) {
+                        //remove
+                        toRemove.add(word);
+                    }
+                }
+            }
+        }
         patternWords.removeAll(toRemove);
         for (String element2 : patternWords) { //each same-length word checked
             Integer i = 0;
@@ -54,6 +64,8 @@ public class PAGALetterFreqGuesser implements Guesser {
                 }
             }
         }
+
+
         /** loop below finds the most frequent letter from the list of words remaining that match the pattern**/
         for (String word : patternWords2) {
             for (Character ch : word.toCharArray()) {
