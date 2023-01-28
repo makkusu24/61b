@@ -25,20 +25,15 @@ public class PAGALetterFreqGuesser implements Guesser {
             }
         }
         for (Character squish : guesses) { //REMOVE all words that are in guesses but not in the pattern || NEW FROM PA --> PAGA
+            if (!pattern.contains(squish + "")) {  //if the letter is not in the pattern already
                 for (String squishWord : patternWords) {
-                    if (squishWord.contains(Character.toString(squish)) && Arrays.asList(patternArray).contains(squish) == false) { //if the pattern word contains a guess character AND the guess character is not present in the pattern, remove it
+                    if (squishWord.contains(Character.toString(squish))) { //if the pattern word contains a guess character AND the guess character is not present in the pattern, remove it
                         toRemove.add(squishWord);
                     }
                 }
             }
+        }
         patternWords.removeAll(toRemove);
-        /**for (Character squish : guesses) {
-            for (char squishPattern : patternArray) {
-                if (squishPattern != squish) {
-
-                }
-            }
-        }**/
         for (String element2 : patternWords) { //each same-length word checked
             Integer i = 0;
             for (Character element3 : element2.toCharArray()) { //each character in the same-length word checked against INDEXED PATTERN
