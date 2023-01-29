@@ -37,11 +37,10 @@ public class PAGALetterFreqGuesser implements Guesser {
         toRemove = new ArrayList<>();
         //remove words that contain multiple of a certain guess when the pattern doesnt have multiple of it
         for (Character g : guesses) {   //all the guesses
-            for (String word : patternWords) { //liable words
+            for (String word : patternWords) { //viable words to filter through
                 for (int c = 0; c<word.length(); c++) { //iterating over the letters in the current word
                     if (word.charAt(c) == g && pattern.charAt(c) !=g) { //there are two checks: (1) if the guess and the current letter in the patternWordBank match, and (2) if the pattern current (also iterating over) character DOES NOT match the current letter in the patternWordBank match
-                        //remove
-                        toRemove.add(word);
+                        toRemove.add(word); //remove
                     }
                 }
             }
