@@ -39,9 +39,9 @@ public class RandomChooser implements Chooser {
         }
         if (counter > 0) { //only runs the follow for loop and its nested loops if there is a valid guess (i.e., letter sets counter to a natural number)
             int counter2 = 0;
-            for (Character letterCompare : patternPlaceholder) { //first we iterate over each letter or dash in the current pattern
-                if (letterCompare != '-') { //if there's already a registered CORRECTLY GUESSED LETTER from prior attempts, then pattern's letter is left as is
-                    placeholder += letterCompare; //this is just to track the already guessed letters in the placeholder
+            for (int w = counter2; w < patternPlaceholder.length; w++) { //first we iterate over each letter or dash in the current pattern
+                if (patternPlaceholder[w] != '-') { //if there's already a registered CORRECTLY GUESSED LETTER from prior attempts, then pattern's letter is left as is
+                    placeholder += patternPlaceholder[w]; //this is just to track the already guessed letters in the placeholder
                     counter2++;
                 }
                 else { //if the current letterCompare is a dash, we check to see if the guess can replace the '-' or not
@@ -49,23 +49,18 @@ public class RandomChooser implements Chooser {
                         if (wordArray[l] == letter) { //letter is a valid guess
                             placeholder += letter; //replaces dash with the correct letter
                             counter2++;
+                            break;
                         }
                         else {
                             placeholder += '-'; //keeps '-' as a '-'
                             counter2++;
+                            break;
                         }
                     }
                 }
-                counter2++;
             }
             this.pattern = placeholder;
         }
-        /**for (Character letterReal : wordArray) { //code that modifies pattern
-            for ()
-            if (letterReal == letter) {
-                this.pattern = //modify pattern class variable to reveal the correctly guessed letter
-            }
-        }**/
         return counter;
     }
 
