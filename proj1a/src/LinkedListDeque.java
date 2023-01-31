@@ -5,13 +5,18 @@ public class LinkedListDeque<T> implements Deque<T> {
         Deque<Integer> lld = new LinkedListDeque<>();
     }
 
+    /**
+     * @source [insert links for whatever inspiration you use for constructor
+     *
+     */
     public LinkedListDeque() {
-        
+    T node = null;
+
     }
 
     @Override
     public void addFirst(T x) {
-
+    //T.next = new IntNode(x, T.next);
     }
 
     @Override
