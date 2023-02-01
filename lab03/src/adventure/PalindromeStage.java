@@ -64,9 +64,14 @@ public class PalindromeStage implements AdventureStage {
     /** Returns a new IntList with the contents of the original IntList in reverse order.*/
     private static IntList reverseList(IntList l) {
         IntList reversed = null;
-        while (l.rest != null) {
-            reversed = new IntList(l.first, reversed);
-            l = l.rest;
+        IntList placeholderLL = new IntList(l.first, l.rest);
+        while (placeholderLL != null) { // used to be l.rest
+            //reversed = new IntList(l.first, reversed);
+            //l = l.rest;
+            IntList nextLL = placeholderLL.rest;
+            placeholderLL.rest = reversed;
+            reversed = placeholderLL;
+            placeholderLL = nextLL;
         }
         return reversed;
     }
