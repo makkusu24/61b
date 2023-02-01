@@ -109,6 +109,6 @@ public class SpeciesListStage implements AdventureStage {
         if (listOne.size() == 0 || listTwo.size() == 0) {
             return 1;
         }
-        return similarObjects / listOne.size();
+        return similarObjects * 1.0 / listOne.size();
     }
 }
