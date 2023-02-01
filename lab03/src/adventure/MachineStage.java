@@ -77,15 +77,15 @@ public class MachineStage implements AdventureStage {
         return responses;
     }
 
-    public static int mysteryMax(int a, int b) {
-        int w = (b - a) >> 31;
-        int z = ~(b - a) >> 31;
+    public static int mysteryMax(int a, int b) { //really just returns min
+        int z = (b - a) >> 31;
+        int w = ~(b - a) >> 31;
 
         int max = b & w | a & z;
         return max;
     }
 
-    public static int mysteryAdd(int a, int b) {
+    public static int mysteryAdd(int a, int b) { // suspect #1
         int x = a, y = b;
         int xor, and, temp;
         and = x & y;
@@ -105,7 +105,7 @@ public class MachineStage implements AdventureStage {
      * a[i] and b[i]. For example, if a = {1, -10, 3}
      * and b = {0, 20, 5}, this function will return {1, 20, 5}.
      */
-    public static int[] arrayMax(int[] a, int[] b) {
+    public static int[] arrayMax(int[] a, int[] b) { //REAL suspect #2
         if (a.length != b.length) {
             System.out.println("ERROR! Array lengths don't match");
             return null;
@@ -126,7 +126,7 @@ public class MachineStage implements AdventureStage {
         int i = 0;
         int sum = 0;
         while (i < x.length) {
-            sum = sum + mysteryAdd(sum, x[i]);
+            sum = mysteryAdd(sum, x[i]);
             i = i + 1;
         }
         return sum;
