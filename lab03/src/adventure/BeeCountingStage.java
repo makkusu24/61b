@@ -17,7 +17,7 @@ public class BeeCountingStage implements AdventureStage {
     public BeeCountingStage(In in) {
         this.in = in;
         this.responses = Map.of("go", new SpeciesListStage(in));
-        this.input = new ArrayList<>();
+        this.input = new ArrayList<>(); //only difference <String> <-> all tests passed in Lab 02
     }
 
     /**
