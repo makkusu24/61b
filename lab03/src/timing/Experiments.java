@@ -60,7 +60,7 @@ public class Experiments {
         List<Double> times = new ArrayList<>();
         List<Integer> opCounts = new ArrayList<>();
 
-        int ops = 100;
+        int ops = 1;
 
         for (int N = 1000; N <= 128000; N = N * 2) {
            AList<Integer> a = new AList<>();
@@ -87,7 +87,7 @@ public class Experiments {
         List<Double> times = new ArrayList<>();
         List<Integer> opCounts = new ArrayList<>();
 
-        int ops = 100;
+        int ops = 1;
         int M = 1000;
 
         for (int N = 1000; N <= 128000; N = N * 2) {
