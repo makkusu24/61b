@@ -48,7 +48,7 @@ public class Experiments {
             for (int j = 0; j < ops; j++) {
                 int fib = fib(N);
             }
-            System.out.println(sw.elapsedTime());
+            //System.out.println(sw.elapsedTime());
             times.add(sw.elapsedTime());
         }
 
@@ -60,17 +60,21 @@ public class Experiments {
         List<Double> times = new ArrayList<>();
         List<Integer> opCounts = new ArrayList<>();
 
-        int ops = 100000;
+        int ops = 100;
 
         for (int N = 1000; N <= 128000; N = N * 2) {
-            AList<Integer> a = new AList<>();
+           AList<Integer> a = new AList<>();
             Ns.add(N);
             opCounts.add(ops);
             Stopwatch sw = new Stopwatch();
             for (int j = 0; j < ops; j++) {
-                a.addLast(N);
+                //AList<Integer> a = new AList<>();
+                for (int i = 0; i <= N; i++) {
+                    a.addLast(i);
+                }
+                //a.addLast(N); //can't just a.addLast(N), we need to actually fill the array
             }
-            System.out.println(sw.elapsedTime());
+            //System.out.println(sw.elapsedTime());
             times.add(sw.elapsedTime());
         }
 
@@ -94,7 +98,7 @@ public class Experiments {
         // TODO: Modify the following line to change the experiment you're running
         TimingData td = timeAListConstruction();
         // Modify this line to make the chart title make sense
-        String title = "AList Bad Resizing";
+        String title = "AList Good Resizing";
 
         // Convert "times" (in seconds) and "opCounts" to nanoseconds / op
         List<Double> timesUsPerOp = new ArrayList<>();
