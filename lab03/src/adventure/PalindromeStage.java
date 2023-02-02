@@ -64,14 +64,16 @@ public class PalindromeStage implements AdventureStage {
     /** Returns a new IntList with the contents of the original IntList in reverse order.*/
     private static IntList reverseList(IntList l) {
         IntList reversed = null;
-        IntList placeholderLL = new IntList(l.first, l.rest);
-        while (placeholderLL != null) { // used to be l.rest
-            //reversed = new IntList(l.first, reversed);
-            //l = l.rest;
+        //IntList placeholderLL = new IntList(l.first, l.rest);
+        while (l != null) { // used to be l.rest
+            reversed = new IntList(l.first, reversed);
+            l = l.rest;
+            /**
             IntList nextLL = placeholderLL.rest;
             placeholderLL.rest = reversed;
             reversed = placeholderLL;
             placeholderLL = nextLL;
+             */
         }
         return reversed;
     }
@@ -82,8 +84,8 @@ public class PalindromeStage implements AdventureStage {
      */
     private static IntList digitsToIntList(String s) {
         int[] a = new int[s.length()]; //creates array same length as input
-        for (int i = 0; i < s.length(); i++) { // original: (int i = s.length(); i > 0; i++)
-            a[s.length()-(i+1)] = Character.getNumericValue(s.charAt(i)); //try to remove -i
+        for (int i = s.length(); i > 0; i--) { // original: (int i = s.length(); i > 0; i++)
+            a[s.length()-i] = Character.getNumericValue(s.charAt(i-1)); //try to remove -i
         }
         return IntList.of(a);
     }

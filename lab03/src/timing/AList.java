@@ -1,5 +1,12 @@
 package timing;
 
+import org.knowm.xchart.QuickChart;
+import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.XYChart;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /** Array based list.
  *  @author Josh Hug
  */
