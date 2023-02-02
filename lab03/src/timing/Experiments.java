@@ -48,6 +48,7 @@ public class Experiments {
             for (int j = 0; j < ops; j++) {
                 int fib = fib(N);
             }
+            System.out.println(sw.elapsedTime());
             times.add(sw.elapsedTime());
         }
 
@@ -59,18 +60,20 @@ public class Experiments {
         List<Double> times = new ArrayList<>();
         List<Integer> opCounts = new ArrayList<>();
 
-        int ops = 100;
-        //AList<Integer> a = new AList<Integer>();
+        int ops = 100000;
 
-        for (int N = 1000; N < 128000; N = N * 2) {
+        for (int N = 1000; N <= 128000; N = N * 2) {
+            AList<Integer> a = new AList<>();
             Ns.add(N);
             opCounts.add(ops);
             Stopwatch sw = new Stopwatch();
             for (int j = 0; j < ops; j++) {
-                int fib = fib(N); //int alist = a.addLast(N);
+                a.addLast(N);
             }
+            System.out.println(sw.elapsedTime());
             times.add(sw.elapsedTime());
         }
+
 
         return new TimingData(Ns, times, opCounts);
     }
