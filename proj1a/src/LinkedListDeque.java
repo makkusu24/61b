@@ -1,15 +1,19 @@
 import java.util.List;
 
 public class LinkedListDeque<T> implements Deque<T> {
+    /**
+     * IMPLEMENT NODE CLASS WITHIN LinkedListDeque (5%)
+     * @param args
+     */
     public static void main(String[] args) {
         Deque<Integer> lld = new LinkedListDeque<>();
     }
 
     /**
      * @source [insert links for whatever inspiration you use for constructor
-     *
+     * LinkedListDeque() must take 0 args; keep as iss
      */
-    public LinkedListDeque() {
+    public LinkedListDeque() { // 5% Proj 1A weight for implementing this constructor ALONGSIDE valid node class
     T node = null;
 
     }
