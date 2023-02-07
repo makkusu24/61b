@@ -2,29 +2,35 @@ import java.util.List;
 
 public class LinkedListDeque<T> implements Deque<T> {
     /**
-     * IMPLEMENT NODE CLASS WITHIN LinkedListDeque (5%) --> should be private & static
-     *
+     * @source lec 5 github code uploaded by Hug
+     * NOTE: maybe has to be static? initial implementation doesn't work if static
+     * Nested Node class within LLD (not to be confused with LLD constructor)
      */
-    private class Node { // maybe it has to be static?
+    private class Node { //each Node has its generic item, a next pointer, and a previous pointer
         public T item;
         public Node next;
+        public Node prev;
 
-        public Node(T i, Node n) {
+        public Node(T i, Node n, Node p) { // Node constructor within the nested Node class
             item = i;
             next = n;
+            prev = p;
         }
     }
 
+    private Node sentinel;
     private Node first;
+    private Node next;
     private int size;
 
     /**
      * @source [insert links for whatever inspiration you use for constructor
      * LinkedListDeque() must take 0 args; keep as is
      */
-    public LinkedListDeque() { // DLList constructor
-        sentinel = new Node(T);
-
+    public LinkedListDeque() { // LLD constructor to add sentinel; points at itself topology
+        sentinel = new Node();
+        sentinel.next = sentinel;
+        sentinel.prev = sentinel;
 
     }
     public static void main(String[] args) {
