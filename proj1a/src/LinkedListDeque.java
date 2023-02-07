@@ -11,9 +11,9 @@ public class LinkedListDeque<T> implements Deque<T> {
         public Node next;
         public Node prev;
 
-        public Node(T i, Node n, Node p) { // Node constructor within the nested Node class
+        public Node(T i, Node n, Node p) { // Node constructor within the nested Node class; may not need args? [COME BACK TO]
             item = i;
-            next = n;
+            next = n; //shouldn't this default to null? [COME BACK TO]
             prev = p;
         }
     }
@@ -28,13 +28,15 @@ public class LinkedListDeque<T> implements Deque<T> {
      * LinkedListDeque() must take 0 args; keep as is
      */
     public LinkedListDeque() { // LLD constructor to add sentinel; points at itself topology
-        sentinel = new Node();
+        sentinel = new Node(null, null, null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
 
     }
     public static void main(String[] args) {
         Deque<Integer> lld = new LinkedListDeque<>();
+        //addFirst calls
+        //addLast calls
     }
 
     @Override
