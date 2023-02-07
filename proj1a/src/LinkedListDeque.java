@@ -2,20 +2,33 @@ import java.util.List;
 
 public class LinkedListDeque<T> implements Deque<T> {
     /**
-     * IMPLEMENT NODE CLASS WITHIN LinkedListDeque (5%)
-     * @param args
+     * IMPLEMENT NODE CLASS WITHIN LinkedListDeque (5%) --> should be private & static
+     *
      */
-    public static void main(String[] args) {
-        Deque<Integer> lld = new LinkedListDeque<>();
+    private class Node { // maybe it has to be static?
+        public T item;
+        public Node next;
+
+        public Node(T i, Node n) {
+            item = i;
+            next = n;
+        }
     }
+
+    private Node first;
+    private int size;
 
     /**
      * @source [insert links for whatever inspiration you use for constructor
-     * LinkedListDeque() must take 0 args; keep as iss
+     * LinkedListDeque() must take 0 args; keep as is
      */
-    public LinkedListDeque() { // 5% Proj 1A weight for implementing this constructor ALONGSIDE valid node class
-    T node = null;
+    public LinkedListDeque() { // DLList constructor
+        sentinel = new Node(T);
 
+
+    }
+    public static void main(String[] args) {
+        Deque<Integer> lld = new LinkedListDeque<>();
     }
 
     @Override
