@@ -227,7 +227,7 @@ public class LinkedListDequeTest {
 
         lld6.addLast(1);
         lld6.removeFirst();
-        lld6.addLast(1);
+        lld6.addLast(1); // [1] -> [1]
 
         assertWithMessage("can't removeFirst from empty LLD").that(lld1.removeFirst()).isEqualTo(null);
         assertWithMessage("should remove 3").that(lld2.toList()).containsExactly(2, 1).inOrder();
@@ -267,11 +267,11 @@ public class LinkedListDequeTest {
         lld5.addLast("lions");
         lld5.removeLast(); // ["seven", "lions"] -> ["seven"]
 
-        lld6.addLast(1);
-        lld6.removeFirst();
-        lld6.addLast(1);
+        lld6.addFirst(1);
+        lld6.removeLast();
+        lld6.addFirst(1); // [1] -> [1]
 
-        assertWithMessage("can't removeLast from empty LLD").that(lld1.removeFirst()).isEqualTo(null);
+        assertWithMessage("can't removeLast from empty LLD").that(lld1.removeLast()).isEqualTo(null);
         assertWithMessage("should remove 1").that(lld2.toList()).containsExactly(3, 2).inOrder();
         assertWithMessage("should remove the and world").that(lld3.toList()).containsExactly("EDM", "will", "save").inOrder();
         assertWithMessage("should remove the only item").that(lld4.toList()).containsExactly().inOrder();
