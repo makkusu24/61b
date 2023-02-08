@@ -37,14 +37,19 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
     public static void main(String[] args) {
         Deque<Integer> lld = new LinkedListDeque<>();
+        lld.addFirst(5);
+        lld.addFirst(4);
+        lld.addFirst(3);
         lld.addFirst(2);
         lld.addFirst(1);
-        lld.addFirst(3);
-        lld.addFirst(4);
-        lld.addFirst(5);
         //lld.addLast(3);
         System.out.println(lld.toList());
         //lld.addLast(4);
+         /**
+        lld.addFirst("back");
+        lld.addFirst("middle");
+        System.out.println(lld.toList());
+         */
     }
 
     @Override
