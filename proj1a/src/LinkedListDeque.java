@@ -19,7 +19,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
     }
 
-    public Node sentinel;
+    private Node sentinel;
     private int size;
 
     /**
@@ -63,7 +63,6 @@ public class LinkedListDeque<T> implements Deque<T> {
         Node first = new Node(x, sentinel.next, sentinel);
         sentinel.next.prev = first;
         sentinel.next = first;
-        //sentinel.next.prev = first;
         size += 1;
     }
 
