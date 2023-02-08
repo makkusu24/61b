@@ -121,4 +121,30 @@ public class LinkedListDequeTest {
         assertWithMessage("wrong size for long length").that(lld4.size()).isEqualTo(100);
     }
 
+    @Test
+    @DisplayName("Tests 0-indexing iterative get function, returning null for negative and OOB inputs.")
+    public void getTests() {
+        Deque<Integer> lld1 = new LinkedListDeque<>();
+        Deque<Integer> lld2 = new LinkedListDeque<>();
+        Deque <String> lld3 = new LinkedListDeque<>();
+
+        lld2.addFirst(1);
+        lld2.addFirst(2);
+        lld2.addFirst(3);
+
+        lld3.addLast("EDM");
+        lld3.addLast("will");
+        lld3.addLast("save");
+        lld3.addLast("the");
+        lld3.addLast("world");
+
+        assertWithMessage("can't get from empty LLD").that(lld1.get(0)).isEqualTo(null);
+        assertWithMessage("can't get from empty LLD").that(lld1.get(1)).isEqualTo(null);
+        assertWithMessage("negative index should return null").that(lld2.get(-2)).isEqualTo(null);
+        assertWithMessage("out of bounds should return null").that(lld2.get(5)).isEqualTo(null);
+        assertWithMessage("get(0) should return first item").that(lld3.get(0)).isEqualTo("EDM");
+        assertWithMessage("get(1) should return the second item").that(lld3.get(1)).isEqualTo("will");
+        assertWithMessage("get(4) should return the last item").that(lld3.get(4)).isEqualTo("world");
+    }
+
 }

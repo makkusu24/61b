@@ -74,7 +74,7 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     @Override
-    public List<T> toList() {
+    public List<T> toList() { //does it alter the deque? [COME BACK TO THIS]
         List<T> returnList = new ArrayList<>();
         while (sentinel.next != sentinel) {
             returnList.add(sentinel.next.item);
@@ -110,7 +110,16 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T get(int index) {
-        return null;
+        if (index < 0 || index > size) {
+            return null;
+        }
+        Node temp = sentinel.next;
+        int count = 0;
+        while (count != index) {
+            count += 1;
+            temp = temp.next;
+        }
+        return temp.item;
     }
 
     @Override
