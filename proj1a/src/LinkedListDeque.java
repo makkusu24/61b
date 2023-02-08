@@ -20,8 +20,6 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     private Node sentinel;
-    //private Node first;
-    //private Node next;
     private int size;
 
     /**

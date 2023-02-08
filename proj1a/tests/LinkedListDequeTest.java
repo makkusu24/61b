@@ -71,6 +71,28 @@ public class LinkedListDequeTest {
      }
 
      //Below, you'll write your own tests for LinkedListDeque.
+
+    @Test
+    //@DisplayName("If there exists an element at the front of the LLD, the method should remove it and no longer reference it.")
+    public void toListTests() {
+        Deque<Integer> lld1 = new LinkedListDeque<>();
+        Deque<Integer> lld2 = new LinkedListDeque<>();
+        Deque <String> lld3 = new LinkedListDeque<>();
+
+        lld2.addFirst(1);
+        lld2.addFirst(2);
+        lld2.addFirst(3);
+
+        lld3.addLast("EDM");
+        lld3.addLast("will");
+        lld3.addLast("save");
+        lld3.addLast("the");
+        lld3.addLast("world");
+
+        assertWithMessage("should return an empty list").that(lld1.toList()).containsExactly().inOrder();
+        assertWithMessage("should return all integers").that(lld2.toList()).containsExactly(3, 2, 1).inOrder();
+        assertWithMessage("should remove all strings").that(lld3.toList()).containsExactly("EDM", "will", "save", "the", "world").inOrder();
+    }
     @Test
     //@DisplayName("An empty LLD should return true and any other sort of structure should be false.")
     public void isEmptyTests() {
@@ -179,6 +201,9 @@ public class LinkedListDequeTest {
         Deque<Integer> lld1 = new LinkedListDeque<>();
         Deque<Integer> lld2 = new LinkedListDeque<>();
         Deque <String> lld3 = new LinkedListDeque<>();
+        Deque <Integer> lld4 = new LinkedListDeque<>();
+        Deque <String> lld5 = new LinkedListDeque<>();
+        Deque <Integer> lld6 = new LinkedListDeque<>();
 
         lld2.addFirst(1);
         lld2.addFirst(2);
@@ -193,9 +218,23 @@ public class LinkedListDequeTest {
         lld3.removeFirst();
         lld3.removeFirst(); // ["EDM", "will", "save", "the", "world"] -> ["save", "the", "world"]
 
+        lld4.addLast(1);
+        lld4.removeFirst(); // [1] -> []
+
+        lld5.addLast("seven");
+        lld5.addLast("lions");
+        lld5.removeFirst(); // ["seven", "lions"] -> ["lions"]
+
+        lld6.addLast(1);
+        lld6.removeFirst();
+        lld6.addLast(1);
+
         assertWithMessage("can't removeFirst from empty LLD").that(lld1.removeFirst()).isEqualTo(null);
         assertWithMessage("should remove 3").that(lld2.toList()).containsExactly(2, 1).inOrder();
         assertWithMessage("should remove EDM and will").that(lld3.toList()).containsExactly("save", "the", "world").inOrder();
+        assertWithMessage("should remove the only item").that(lld4.toList()).containsExactly().inOrder();
+        assertWithMessage("should remove seven").that(lld5.toList()).containsExactly("lions").inOrder();
+        assertWithMessage("should be same as the original").that(lld6.toList()).containsExactly(1).inOrder();
     }
 
     @Test
@@ -204,6 +243,9 @@ public class LinkedListDequeTest {
         Deque<Integer> lld1 = new LinkedListDeque<>();
         Deque<Integer> lld2 = new LinkedListDeque<>();
         Deque <String> lld3 = new LinkedListDeque<>();
+        Deque <Integer> lld4 = new LinkedListDeque<>();
+        Deque <String> lld5 = new LinkedListDeque<>();
+        Deque <Integer> lld6 = new LinkedListDeque<>();
 
         lld2.addFirst(1);
         lld2.addFirst(2);
@@ -218,9 +260,23 @@ public class LinkedListDequeTest {
         lld3.removeLast();
         lld3.removeLast(); // ["EDM", "will", "save", "the", "world"] -> ["EDM", "will", "save"]
 
+        lld4.addLast(1);
+        lld4.removeFirst(); // [1] -> []
+
+        lld5.addLast("seven");
+        lld5.addLast("lions");
+        lld5.removeFirst(); // ["seven", "lions"] -> ["seven"]
+
+        lld6.addLast(1);
+        lld6.removeFirst();
+        lld6.addLast(1);
+
         assertWithMessage("can't removeLast from empty LLD").that(lld1.removeFirst()).isEqualTo(null);
         assertWithMessage("should remove 1").that(lld2.toList()).containsExactly(3, 2).inOrder();
         assertWithMessage("should remove the and world").that(lld3.toList()).containsExactly("EDM", "will", "save").inOrder();
+        assertWithMessage("should remove the only item").that(lld4.toList()).containsExactly().inOrder();
+        assertWithMessage("should remove seven").that(lld5.toList()).containsExactly("seven").inOrder();
+        assertWithMessage("should be same as the original").that(lld6.toList()).containsExactly(1).inOrder();
     }
 
 }
