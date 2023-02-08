@@ -19,7 +19,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
     }
 
-    private Node sentinel;
+    public Node sentinel;
     private int size;
 
     /**
@@ -40,7 +40,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         lld.addFirst(3);
         lld.addFirst(2);
         lld.addFirst(1);
-        lld.removeLast();
+        lld.removeFirst();
         /**
         lld.addLast(5);
         lld.addLast(4);
@@ -57,7 +57,7 @@ public class LinkedListDeque<T> implements Deque<T> {
          */
         System.out.println(lld.toList());
     }
-
+    
     @Override
     public void addFirst(T x) {
         Node first = new Node(x, sentinel.next, sentinel);
