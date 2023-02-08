@@ -12,9 +12,9 @@ public class LinkedListDeque<T> implements Deque<T> {
         public Node next;
         public Node prev;
 
-        public Node(T i, Node n, Node p) { // Node constructor within the nested Node class; may not need args? [COME BACK TO]
+        public Node(T i, Node n, Node p) {
             item = i;
-            next = n; //shouldn't this default to null? [COME BACK TO]
+            next = n;
             prev = p;
         }
     }
@@ -74,11 +74,12 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     @Override
-    public List<T> toList() { //does it alter the deque? [COME BACK TO THIS]
+    public List<T> toList() {
         List<T> returnList = new ArrayList<>();
-        while (sentinel.next != sentinel) {
-            returnList.add(sentinel.next.item);
-            sentinel.next = sentinel.next.next;
+        Node temp = sentinel.next;
+        while (temp != sentinel) {
+            returnList.add(temp.item);
+            temp = temp.next;
         }
         return returnList;
     }
@@ -124,7 +125,19 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T getRecursive(int index) {
-        return null;
+        if (index < 0 || index > size) {
+            return null;
+        }
+        else {
+            return getRecursiveHelper(index, sentinel.next);
+        }
+    }
+
+    private T getRecursiveHelper(int index, Node sentinel) {
+        if (index == 0) {
+            return sentinel.item;
+        }
+        return getRecursiveHelper(index-1, sentinel.next);
     }
 
 }
