@@ -20,8 +20,8 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     private Node sentinel;
-    private Node first;
-    private Node next;
+    //private Node first;
+    //private Node next;
     private int size;
 
     /**
@@ -42,19 +42,24 @@ public class LinkedListDeque<T> implements Deque<T> {
         lld.addFirst(3);
         lld.addFirst(2);
         lld.addFirst(1);
-        //lld.addLast(3);
-        System.out.println(lld.toList());
-        //lld.addLast(4);
-         /**
+        /**
+        lld.addLast(5);
+        lld.addLast(4);
+        lld.addLast(3);
+        lld.addLast(2);
+        lld.addLast(1);
+         */
+        /**
         lld.addFirst("back");
         lld.addFirst("middle");
-        System.out.println(lld.toList());
+        lld.addFirst("front");
          */
+        System.out.println(lld.size());
     }
 
     @Override
     public void addFirst(T x) {
-    first = new Node(x, sentinel.next, sentinel); //should next be sentinel.next or first? [COME BACK TO]
+    Node first = new Node(x, sentinel.next, sentinel); //should next be sentinel.next or first? [COME BACK TO]
     sentinel.next = first;
     sentinel.next.prev = first;
     size += 1;
@@ -62,9 +67,9 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public void addLast(T x) {
-    first = new Node(x, sentinel, sentinel.prev);
-    sentinel.prev.next = first;
-    sentinel.prev = first;
+    Node last = new Node(x, sentinel, sentinel.prev);
+    sentinel.prev.next = last;
+    sentinel.prev = last;
     size += 1;
     }
 
@@ -80,12 +85,17 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        if (sentinel.next == sentinel) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override

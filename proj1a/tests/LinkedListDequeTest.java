@@ -71,4 +71,54 @@ public class LinkedListDequeTest {
      }
 
      //Below, you'll write your own tests for LinkedListDeque.
+    @Test
+    @DisplayName("An empty LLD should return true and any other sort of structure should be false.")
+    public void isEmptyTests() {
+    Deque<Integer> lld1 = new LinkedListDeque<>();
+    Deque <String> lld2 = new LinkedListDeque<>();
+    Deque<Integer> lld3 = new LinkedListDeque<>();
+
+    lld1.addFirst(5);
+    lld1.addFirst(4);
+    lld1.addFirst(3);
+    lld1.addFirst(2);
+    lld1.addFirst(1);
+
+    lld2.addLast("EDM");
+    lld2.addLast("will");
+    lld2.addLast("save");
+    lld2.addLast("the");
+    lld2.addLast("world");
+
+    assertWithMessage("integer LLD registers as empty").that(lld1.isEmpty()).isEqualTo(false);
+    assertWithMessage("string LLD registers as empty").that(lld2.isEmpty()).isEqualTo(false);
+    assertWithMessage("empty string does not return true").that(lld3.isEmpty()).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("A properly implemented LLD should cache the size with each operation.")
+    public void sizeTests() {
+        Deque<Integer> lld1 = new LinkedListDeque<>();
+        Deque<Integer> lld2 = new LinkedListDeque<>();
+        Deque <String> lld3 = new LinkedListDeque<>();
+        Deque<Integer> lld4 = new LinkedListDeque<>();
+
+        lld2.addFirst(1);
+
+        lld3.addLast("EDM");
+        lld3.addLast("will");
+        lld3.addLast("save");
+        lld3.addLast("the");
+        lld3.addLast("world");
+
+        for (int i = 1; i <= 100; i++) {
+            lld4.addLast(i);
+        }
+
+        assertWithMessage("empty LLD size isn't 0").that(lld1.size()).isEqualTo(0);
+        assertWithMessage("wrong size for small length").that(lld2.size()).isEqualTo(1);
+        assertWithMessage("wrong size for medium length").that(lld3.size()).isEqualTo(5);
+        assertWithMessage("wrong size for long length").that(lld4.size()).isEqualTo(100);
+    }
+
 }
