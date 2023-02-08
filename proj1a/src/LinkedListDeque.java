@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class LinkedListDeque<T> implements Deque<T> {
@@ -31,27 +32,45 @@ public class LinkedListDeque<T> implements Deque<T> {
         sentinel = new Node(null, null, null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
+        size = 0;
 
     }
     public static void main(String[] args) {
         Deque<Integer> lld = new LinkedListDeque<>();
-        //addFirst calls
-        //addLast calls
+        lld.addFirst(2);
+        lld.addFirst(1);
+        lld.addFirst(3);
+        lld.addFirst(4);
+        lld.addFirst(5);
+        //lld.addLast(3);
+        System.out.println(lld.toList());
+        //lld.addLast(4);
     }
 
     @Override
     public void addFirst(T x) {
-    //T.next = new IntNode(x, T.next);
+    first = new Node(x, sentinel.next, sentinel); //should next be sentinel.next or first? [COME BACK TO]
+    sentinel.next = first;
+    sentinel.next.prev = first;
+    size += 1;
     }
 
     @Override
     public void addLast(T x) {
-
+    first = new Node(x, sentinel, sentinel.prev);
+    sentinel.prev.next = first;
+    sentinel.prev = first;
+    size += 1;
     }
 
     @Override
     public List<T> toList() {
-        return null;
+        List<T> returnList = new ArrayList<>();
+        while (sentinel.next != sentinel) {
+            returnList.add(sentinel.next.item);
+            sentinel.next = sentinel.next.next;
+        }
+        return returnList;
     }
 
     @Override
