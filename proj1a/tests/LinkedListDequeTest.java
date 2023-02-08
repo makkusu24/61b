@@ -72,7 +72,7 @@ public class LinkedListDequeTest {
 
      //Below, you'll write your own tests for LinkedListDeque.
     @Test
-    @DisplayName("An empty LLD should return true and any other sort of structure should be false.")
+    //@DisplayName("An empty LLD should return true and any other sort of structure should be false.")
     public void isEmptyTests() {
     Deque<Integer> lld1 = new LinkedListDeque<>();
     Deque <String> lld2 = new LinkedListDeque<>();
@@ -96,7 +96,7 @@ public class LinkedListDequeTest {
     }
 
     @Test
-    @DisplayName("A properly implemented LLD should cache the size with each operation.")
+    //@DisplayName("A properly implemented LLD should cache the size with each operation.")
     public void sizeTests() {
         Deque<Integer> lld1 = new LinkedListDeque<>();
         Deque<Integer> lld2 = new LinkedListDeque<>();
@@ -122,7 +122,7 @@ public class LinkedListDequeTest {
     }
 
     @Test
-    @DisplayName("Tests 0-indexing iterative get function, returning null for negative and OOB inputs.")
+    //@DisplayName("Tests 0-indexing iterative get function, returning null for negative and OOB inputs.")
     public void getTests() {
         Deque<Integer> lld1 = new LinkedListDeque<>();
         Deque<Integer> lld2 = new LinkedListDeque<>();
@@ -148,7 +148,7 @@ public class LinkedListDequeTest {
     }
 
     @Test
-    @DisplayName("Tests 0-indexing recursive get function, returning null for negative and OOB inputs.")
+    //@DisplayName("Tests 0-indexing recursive get function, returning null for negative and OOB inputs.")
     public void getRecursiveTests() {
         Deque<Integer> lld1 = new LinkedListDeque<>();
         Deque<Integer> lld2 = new LinkedListDeque<>();
@@ -171,6 +171,56 @@ public class LinkedListDequeTest {
         assertWithMessage("get(0) should return first item").that(lld3.getRecursive(0)).isEqualTo("EDM");
         assertWithMessage("get(1) should return the second item").that(lld3.getRecursive(1)).isEqualTo("will");
         assertWithMessage("get(4) should return the last item").that(lld3.getRecursive(4)).isEqualTo("world");
+    }
+
+    @Test
+    //@DisplayName("If there exists an element at the front of the LLD, the method should remove it and no longer reference it.")
+    public void removeFirstTests() {
+        Deque<Integer> lld1 = new LinkedListDeque<>();
+        Deque<Integer> lld2 = new LinkedListDeque<>();
+        Deque <String> lld3 = new LinkedListDeque<>();
+
+        lld2.addFirst(1);
+        lld2.addFirst(2);
+        lld2.addFirst(3);
+        lld2.removeFirst(); // [3, 2, 1] -> [2, 1]
+
+        lld3.addLast("EDM");
+        lld3.addLast("will");
+        lld3.addLast("save");
+        lld3.addLast("the");
+        lld3.addLast("world");
+        lld3.removeFirst();
+        lld3.removeFirst(); // ["EDM", "will", "save", "the", "world"] -> ["save", "the", "world"]
+
+        assertWithMessage("can't removeFirst from empty LLD").that(lld1.removeFirst()).isEqualTo(null);
+        assertWithMessage("should remove 3").that(lld2.toList()).containsExactly(2, 1).inOrder();
+        assertWithMessage("should remove EDM and will").that(lld3.toList()).containsExactly("save", "the", "world").inOrder();
+    }
+
+    @Test
+    //@DisplayName("If there exists an element at the front of the LLD, the method should remove it and no longer reference it.")
+    public void removeLastTests() {
+        Deque<Integer> lld1 = new LinkedListDeque<>();
+        Deque<Integer> lld2 = new LinkedListDeque<>();
+        Deque <String> lld3 = new LinkedListDeque<>();
+
+        lld2.addFirst(1);
+        lld2.addFirst(2);
+        lld2.addFirst(3);
+        lld2.removeLast(); // [3, 2, 1] -> [3, 2]
+
+        lld3.addLast("EDM");
+        lld3.addLast("will");
+        lld3.addLast("save");
+        lld3.addLast("the");
+        lld3.addLast("world");
+        lld3.removeLast();
+        lld3.removeLast(); // ["EDM", "will", "save", "the", "world"] -> ["EDM", "will", "save"]
+
+        assertWithMessage("can't removeLast from empty LLD").that(lld1.removeFirst()).isEqualTo(null);
+        assertWithMessage("should remove 1").that(lld2.toList()).containsExactly(3, 2).inOrder();
+        assertWithMessage("should remove the and world").that(lld3.toList()).containsExactly("EDM", "will", "save").inOrder();
     }
 
 }

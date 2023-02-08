@@ -42,6 +42,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         lld.addFirst(3);
         lld.addFirst(2);
         lld.addFirst(1);
+        lld.removeLast();
         /**
         lld.addLast(5);
         lld.addLast(4);
@@ -54,7 +55,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         lld.addFirst("middle");
         lld.addFirst("front");
          */
-        System.out.println(lld.size());
+        System.out.println(lld.toList());
     }
 
     @Override
@@ -101,12 +102,30 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T removeFirst() {
-        return null;
+        if (this.isEmpty() == true) {
+            return null;
+        }
+        else {
+            Node temp = sentinel.next;
+            sentinel.next = sentinel.next.next;
+            sentinel.next.next.prev = sentinel;
+            size -= 1;
+            return temp.item;
+        }
     }
 
     @Override
     public T removeLast() {
-        return null;
+        if (this.isEmpty() == true) {
+            return null;
+        }
+        else {
+            Node temp = sentinel.prev;
+            sentinel.prev = sentinel.prev.prev;
+            sentinel.prev.next = sentinel;
+            size -= 1;
+            return temp.item;
+        }
     }
 
     @Override
