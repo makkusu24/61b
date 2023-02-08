@@ -247,6 +247,11 @@ public class LinkedListDequeTest {
         Deque <String> lld5 = new LinkedListDeque<>();
         Deque <Integer> lld6 = new LinkedListDeque<>();
 
+        /**
+        lld2.addLast(3);
+        lld2.addLast(2);
+        lld2.addLast(1);
+         */
         lld2.addFirst(1);
         lld2.addFirst(2);
         lld2.addFirst(3);
