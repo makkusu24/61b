@@ -261,11 +261,11 @@ public class LinkedListDequeTest {
         lld3.removeLast(); // ["EDM", "will", "save", "the", "world"] -> ["EDM", "will", "save"]
 
         lld4.addLast(1);
-        lld4.removeFirst(); // [1] -> []
+        lld4.removeLast(); // [1] -> []
 
         lld5.addLast("seven");
         lld5.addLast("lions");
-        lld5.removeFirst(); // ["seven", "lions"] -> ["seven"]
+        lld5.removeLast(); // ["seven", "lions"] -> ["seven"]
 
         lld6.addLast(1);
         lld6.removeFirst();
