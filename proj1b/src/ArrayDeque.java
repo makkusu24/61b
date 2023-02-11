@@ -3,6 +3,8 @@ import java.util.List;
 
 public class ArrayDeque<T> implements Deque<T> {
 
+    public int size;
+
     public ArrayDeque() {
 
     }
@@ -40,7 +42,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
