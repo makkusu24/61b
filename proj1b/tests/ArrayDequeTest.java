@@ -170,6 +170,7 @@ public class ArrayDequeTest {
         Deque<Integer> ad4 = new ArrayDeque<>();
         Deque<String> ad5 = new ArrayDeque<>();
         Deque<String> ad6 = new ArrayDeque<>();
+        Deque<Integer> ad7 = new ArrayDeque<>();
 
         ad2.addFirst(1); // [1] -> 1
 
@@ -188,6 +189,8 @@ public class ArrayDequeTest {
         ad6.removeFirst();
         ad6.addFirst("returned"); // ["returned"] -> 1
 
+        ad7.removeLast(); // [] -> []
+
         assertWithMessage("empty AD should be size 0")
                 .that(ad1.size()).isEqualTo(0);
         assertWithMessage("failed small AD size")
@@ -200,6 +203,7 @@ public class ArrayDequeTest {
                 .that(ad5.size()).isEqualTo(0);
         assertWithMessage("failed removed to empty then added size")
                 .that(ad6.size()).isEqualTo(1);
+        assertWithMessage("failed remove from already empty AD").that(ad7.size()).isEqualTo(0);
 
     }
 
@@ -262,9 +266,9 @@ public class ArrayDequeTest {
         ad3.removeLast();
         ad3.removeLast(); // ["come", "around", "again"] -> ["come"]
 
-        ad4.addFirst("removed");
+        ad4.addLast("removed");
         ad4.removeLast();
-        ad4.addFirst("returned"); // ["removed"] -> [] -> ["returned"]
+        ad4.addLast("returned"); // ["removed"] -> [] -> ["returned"]
 
         assertWithMessage("failed remove to empty")
                 .that(ad1.toList()).containsExactly().inOrder();
