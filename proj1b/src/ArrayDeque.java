@@ -21,14 +21,27 @@ public class ArrayDeque<T> implements Deque<T> {
         System.out.println(ad);
     }
 
+    private void resize(int desiredSize) {
+        T[] sized = (T[]) new Object[desiredSize];
+        System.arraycopy(items, 0, sized, 0, size);
+        items = sized;
+    }
+
     @Override
     public void addFirst(T x) { //constant time implementation
-
+        if (size == items.length) {
+            resize(size * 2);
+        }
+        size += 1;
     }
 
     @Override
     public void addLast(T x) {
-
+        if (size == items.length) {
+            resize(size * 2);
+        }
+        items[size] = x;
+        size += 1;
     }
 
     @Override
@@ -52,12 +65,17 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T removeFirst() { // NULL out deleted items to prevent memory loitering (set return item -> delete original pointer)
+
+        size -= 1;
         return null;
     }
 
     @Override
     public T removeLast() {
-        return null;
+        T removed = items[size - 1];
+        items[size - 1] = null;
+        size -= 1;
+        return removed;
     }
 
     @Override
