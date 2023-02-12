@@ -3,10 +3,12 @@ import java.util.List;
 
 public class ArrayDeque<T> implements Deque<T> {
 
-    public int size;
+    private T[] items;
+    private int size;
 
     public ArrayDeque() {
-
+        T[] items = (T[]) new Object[8];
+        size = 0;
     }
 
     /**
@@ -32,11 +34,14 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public List<T> toList() {
         List<T> returnList = new ArrayList<>();
-        return null;
+        return returnList;
     }
 
     @Override
     public boolean isEmpty() {
+        if (items.length == 0) {
+            return true;
+        }
         return false;
     }
 
@@ -57,6 +62,6 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T get(int index) {
-        return null;
+        return items[index];
     }
 }

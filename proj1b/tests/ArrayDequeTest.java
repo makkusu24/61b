@@ -203,7 +203,8 @@ public class ArrayDequeTest {
                 .that(ad5.size()).isEqualTo(0);
         assertWithMessage("failed removed to empty then added size")
                 .that(ad6.size()).isEqualTo(1);
-        assertWithMessage("failed remove from already empty AD").that(ad7.size()).isEqualTo(0);
+        assertWithMessage("failed remove from already empty AD")
+                .that(ad7.size()).isEqualTo(0);
 
     }
 
