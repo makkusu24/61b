@@ -198,7 +198,7 @@ public class ArrayDequeTest {
         assertWithMessage("failed medium AD size")
                 .that(ad3.size()).isEqualTo(3);
         assertWithMessage("failed large AD size")
-                .that(ad4.size()).isEqualTo(4);
+                .that(ad4.size()).isEqualTo(100);
         assertWithMessage("failed removed to empty size")
                 .that(ad5.size()).isEqualTo(0);
         assertWithMessage("failed removed to empty then added size")
