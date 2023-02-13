@@ -35,7 +35,19 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size == items.length) {
             resize(size * 2);
         }
-        front = (front - 1 + items.length) % items.length; // add conditional for if it's empty?
+        if (front == 0) { // new
+            front = items.length - 1;
+        } else {
+            front -= 1;
+        }
+        if (size == 0) { // new new new
+            front = 0;
+            back = 0;
+            items[0] = x;
+            size += 1;
+            return;
+        }
+        //front = (front - 1 + items.length) % items.length; // add conditional for if it's empty?
         items[front] = x;
         size += 1;
     }
@@ -45,7 +57,12 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size == items.length) {
             resize(size * 2);
         }
-        back = (back + 1) % items.length;
+        if (back == items.length - 1) {
+            back = 0;
+        } else {
+            back += 1;
+        }
+        //back = (back + 1) % items.length;
         items[back] = x;
         size += 1;
     }
@@ -53,7 +70,7 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public List<T> toList() {
         List<T> returnList = new ArrayList<>();
-        for (int i = 0; i < size; i++) { // shouldn't start at 0?
+        for (int i = 0; i < items.length; i++) { // items.length OR size?
             returnList.add(items[i]);
         }
         return returnList;
@@ -104,6 +121,6 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T get(int index) {
-        return items[index];
+        return items[(front + index) % items.length];
     }
 }

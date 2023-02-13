@@ -178,7 +178,7 @@ public class ArrayDequeTest {
         ad3.addLast("around");
         ad3.addLast("again"); // ["come", "around", "again"] -> 3
 
-        for (int i = 0; i <= 100; i++) {
+        for (int i = 0; i < 100; i++) {
             ad4.addFirst(i);
         } // [1, ..., 100] -> 100
 
