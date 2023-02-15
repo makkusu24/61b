@@ -17,8 +17,12 @@ public class ArrayDeque<T> implements Deque<T> {
 
     public static void main(String[] args) {
         Deque<Integer> ad = new ArrayDeque<>();
+        ad.addFirst(5);
+        ad.addFirst(4);
+        ad.addFirst(3);
+        ad.addFirst(2);
         ad.addFirst(1);
-        ad.addFirst(0);
+        ad.addFirst(111);
         System.out.println(ad.toList());
     }
 
@@ -35,6 +39,7 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size == items.length) {
             resize(size * 2);
         }
+        /**
         if (front == 0) { // new
             front = items.length - 1;
         } else {
@@ -47,7 +52,8 @@ public class ArrayDeque<T> implements Deque<T> {
             size += 1;
             return;
         }
-        //front = (front - 1 + items.length) % items.length; // add conditional for if it's empty?
+         */
+        front = (front - 1 + items.length) % items.length; // add conditional for if it's empty?
         items[front] = x;
         size += 1;
     }
@@ -70,8 +76,8 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public List<T> toList() {
         List<T> returnList = new ArrayList<>();
-        for (int i = 0; i < items.length; i++) { // items.length OR size?
-            returnList.add(items[i]);
+        for (int i = front; i <= items.length; i++) { // items.length OR size?
+            returnList.add(items[i % items.length]);
         }
         return returnList;
     }
