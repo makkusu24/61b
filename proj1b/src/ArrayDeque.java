@@ -7,15 +7,16 @@ public class ArrayDeque<T> implements Deque<T> {
     private int size;
     private int front;
     private int back;
+    private static final int DEFAULT_SIZE = 8;
 
     public ArrayDeque() {
-        items = (T[]) new Object[8];
+        items = (T[]) new Object[DEFAULT_SIZE];
         size = 0;
         front = 0;
         back = -1; // specify size - 1 instead?
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { // comment explanations for everything once done
         Deque<Integer> ad = new ArrayDeque<>();
         ad.addFirst(5);
         ad.addFirst(4);
@@ -23,6 +24,10 @@ public class ArrayDeque<T> implements Deque<T> {
         ad.addFirst(2);
         ad.addFirst(1);
         ad.addFirst(111);
+        ad.addLast(1);
+        ad.addFirst(1);
+        ad.addFirst(1);
+        ad.addLast(77);
         System.out.println(ad.toList());
     }
 
@@ -56,6 +61,9 @@ public class ArrayDeque<T> implements Deque<T> {
         front = (front - 1 + items.length) % items.length; // add conditional for if it's empty?
         items[front] = x;
         size += 1;
+        if (front == -1) {
+            front = back;// this is new new 7:39 PM 2/14 NEW
+        }
     }
 
     @Override
@@ -63,21 +71,34 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size == items.length) {
             resize(size * 2);
         }
+        /**
         if (back == items.length - 1) {
             back = 0;
         } else {
             back += 1;
         }
-        //back = (back + 1) % items.length;
+         */
+        back = (back + 1) % items.length;
         items[back] = x;
         size += 1;
+        if (front == 0) {
+            front = back;
+        }
     }
 
     @Override
     public List<T> toList() {
         List<T> returnList = new ArrayList<>();
-        for (int i = front; i <= items.length; i++) { // items.length OR size?
+        /**
+        for (int i = front; i < items.length; i++) { // items.length OR size?
             returnList.add(items[i % items.length]);
+        }
+         */
+        for (int i = 0; i < size; i++) {
+            int index = (front + i) % items.length;
+            if (items[index] != null) {
+                returnList.add(items[index]);
+            }
         }
         return returnList;
     }
