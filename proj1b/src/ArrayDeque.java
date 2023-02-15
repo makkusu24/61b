@@ -22,17 +22,11 @@ public class ArrayDeque<T> implements Deque<T> {
         items = (T[]) new Object[DEFAULT_SIZE];
         size = 0;
         front = 0;
-        back = -1;
+        back = -1; // distinguish empty from non-empty ADs
     }
 
     public static void main(String[] args) {
-        Deque<Integer> ad1 = new ArrayDeque<>();
-        for (int i = 0; i < 100; i++) {
-            ad1.addLast(i);
-        }
-        for (int i = 0; i < 75; i++) {
-            ad1.removeLast();
-        }
+        Deque<Integer> ad1 = new ArrayDeque<>(); // failing addFirst -> removeLast
         System.out.println(ad1.toList());
     }
 
@@ -158,8 +152,8 @@ public class ArrayDeque<T> implements Deque<T> {
         if (isEmpty()) {
             return null;
         }
-        T removed = items[back + 1];
-        items[back + 1] = null; // removes pointer to save memory
+        T removed = items[(back + 1) % items.length];
+        items[(back + 1) % items.length] = null; // removes pointer to save memory
         back = (back - 1 + items.length) % items.length;
         size -= 1;
         if (size == 0) {
