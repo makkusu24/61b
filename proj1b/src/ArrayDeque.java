@@ -61,9 +61,9 @@ public class ArrayDeque<T> implements Deque<T> {
         front = (front - 1 + items.length) % items.length; // add conditional for if it's empty?
         items[front] = x;
         size += 1;
-        if (front == -1) {
-            front = back;// this is new new 7:39 PM 2/14 NEW
-        }
+        //if (front == -1) {
+            //front = back;// this is new new 7:39 PM 2/14 NEW
+        //}
     }
 
     @Override
@@ -81,9 +81,9 @@ public class ArrayDeque<T> implements Deque<T> {
         back = (back + 1) % items.length;
         items[back] = x;
         size += 1;
-        if (front == 0) {
-            front = back;
-        }
+        //if (front == 0) {
+            //front = back;
+        //}
     }
 
     @Override
@@ -125,7 +125,11 @@ public class ArrayDeque<T> implements Deque<T> {
         items[front] = null;
         front = (front + 1) % items.length;
         size -= 1;
-        if (size < 0 && size == items.length / 4) {
+        if (size == 0) {
+            front = 0;
+            back = -1;
+        }
+        else if (size < items.length / 4) {
             resize(items.length / 2);
         }
         return removed;
@@ -140,7 +144,11 @@ public class ArrayDeque<T> implements Deque<T> {
         items[back] = null;
         back = (back - 1 + items.length) % items.length;
         size -= 1;
-        if (size < 0 && size == items.length / 4) {
+        if (size == 0) {
+            front = 0;
+            back = -1;
+        }
+        else if (size < items.length / 4) {
             resize(items.length / 2);
         }
         return removed;
@@ -148,6 +156,9 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T get(int index) {
+        if (index < 0 || index > size) {
+            return null;
+        }
         return items[(front + index) % items.length];
     }
 }
