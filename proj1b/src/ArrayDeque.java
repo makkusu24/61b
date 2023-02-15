@@ -27,8 +27,12 @@ public class ArrayDeque<T> implements Deque<T> {
 
     public static void main(String[] args) {
         Deque<Integer> ad1 = new ArrayDeque<>();
-        ad1.addFirst(0);
-        ad1.removeLast();
+        for (int i = 0; i < 100; i++) {
+            ad1.addLast(i);
+        }
+        for (int i = 0; i < 75; i++) {
+            ad1.removeLast();
+        }
         System.out.println(ad1.toList());
     }
 
@@ -154,8 +158,8 @@ public class ArrayDeque<T> implements Deque<T> {
         if (isEmpty()) {
             return null;
         }
-        T removed = items[back+1];
-        items[back+1] = null; // removes pointer to save memory
+        T removed = items[back + 1];
+        items[back + 1] = null; // removes pointer to save memory
         back = (back - 1 + items.length) % items.length;
         size -= 1;
         if (size == 0) {

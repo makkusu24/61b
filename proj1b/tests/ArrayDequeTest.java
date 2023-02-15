@@ -9,7 +9,7 @@ public class ArrayDequeTest {
     @Test
     @DisplayName("addFirst() implementation, edge cases, time efficiency")
 
-    public void addFirstTests() { // implement trigger resize tests (resize up and down cases)
+    public void addFirstTests() {
 
         Deque<Integer> ad1 = new ArrayDeque<>();
         Deque<Integer> ad2 = new ArrayDeque<>();
@@ -41,7 +41,7 @@ public class ArrayDequeTest {
     @Test
     @DisplayName("addLast() implementation, edge cases, time efficiency")
 
-    public void addLastTests() { // implement trigger resize tests (resize up and down cases)
+    public void addLastTests() {
 
         Deque<Integer> ad1 = new ArrayDeque<>();
         Deque<Integer> ad2 = new ArrayDeque<>();
@@ -211,7 +211,7 @@ public class ArrayDequeTest {
     @Test
     @DisplayName("removeFirst() implementation, edge cases, time efficiency")
 
-    public void removeFirstTests() { // trigger resize
+    public void removeFirstTests() {
 
         Deque<Integer> ad1 = new ArrayDeque<>();
         Deque<Integer> ad2 = new ArrayDeque<>();
@@ -248,7 +248,7 @@ public class ArrayDequeTest {
     @Test
     @DisplayName("removeLast() implementation, edge cases, time efficiency")
 
-    public void removeLastTests() { // trigger resize
+    public void removeLastTests() {
 
         Deque<Integer> ad1 = new ArrayDeque<>();
         Deque<Integer> ad2 = new ArrayDeque<>();
@@ -313,6 +313,34 @@ public class ArrayDequeTest {
                 .that(ad3.get(1)).isEqualTo("to");
         assertWithMessage("get(4) should return the last item")
                 .that(ad3.get(3)).isEqualTo("world");
+
+    }
+
+    @Test
+    @DisplayName("remove methods resize trigger")
+
+    public void removeResizeTests() {
+        Deque<Integer> ad1 = new ArrayDeque<>();
+        Deque<Integer> ad2 = new ArrayDeque<>();
+
+        for (int i = 0; i < 100; i++) {
+            ad1.addFirst(i);
+        }
+        for (int i = 0; i < 75; i++) {
+            ad1.removeFirst();
+        }
+
+        for (int i = 0; i < 100; i++) {
+            ad2.addLast(i);
+        }
+        for (int i = 0; i < 75; i++) {
+            ad2.removeLast();
+        }
+
+        assertWithMessage("failed removeFirst() resize down")
+                .that(ad1.toList()).containsExactly(24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0).inOrder();
+        assertWithMessage("failed removeLast() resize down")
+                .that(ad2.toList()).containsExactly(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24).inOrder();
 
     }
 
