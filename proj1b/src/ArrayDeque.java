@@ -178,4 +178,5 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         return items[(front + index) % items.length];
     }
+
 }
