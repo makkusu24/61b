@@ -293,7 +293,6 @@ public class ArrayDequeTest {
 
         ad2.addLast(1);
 
-
         ad3.addLast("goodbye");
         ad3.addLast("to");
         ad3.addLast("a");
