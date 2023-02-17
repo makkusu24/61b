@@ -36,11 +36,4 @@ public class ArrayDequeTest {
 
     }
 
-    @Test
-    @DisplayName("toString() implementation and edge cases")
-
-    public void toStringTests() {
-
-    }
-
 }

@@ -29,8 +29,10 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     public static void main(String[] args) {
-        Deque<Integer> ad1 = new ArrayDeque<>();
-        System.out.println(ad1.toList());
+        Deque<String> ad = new ArrayDeque<>();
+        ad.addLast("hello");
+        ad.addLast("human");
+        System.out.println(ad);
     }
 
     /**
@@ -199,7 +201,8 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public String toString() {
-        return null;
+        String returnString = this.toList().toString();
+        return returnString;
     }
 
 }

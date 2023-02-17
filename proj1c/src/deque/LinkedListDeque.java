@@ -33,7 +33,9 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     }
     public static void main(String[] args) {
-        Deque<Integer> lld = new LinkedListDeque<>();
+        Deque<String> lld = new LinkedListDeque<>();
+        lld.addLast("hello");
+        lld.addLast("human");
         System.out.println(lld.toList());
     }
 
@@ -145,7 +147,8 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public String toString() {
-        return null;
+        String returnString = this.toList().toString();
+        return returnString;
     }
 
 }
