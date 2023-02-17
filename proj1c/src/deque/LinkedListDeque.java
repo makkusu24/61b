@@ -1,6 +1,7 @@
 package deque;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class LinkedListDeque<T> implements Deque<T> {
@@ -130,6 +131,11 @@ public class LinkedListDeque<T> implements Deque<T> {
             return s.item;
         }
         return getRecursiveHelper(index - 1, s.next);
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return null;
     }
 
 }
