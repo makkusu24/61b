@@ -1,27 +1,26 @@
-import deque.ArrayDeque;
-import deque.Deque;
-import deque.LinkedListDeque;
+package deque;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
-public class LinkedListDequeTest {
+public class ArrayDequeTest {
 
     @Test
     @DisplayName("iterator() implementation and edge cases")
 
     public void iteratorTests() {
-        Deque<String> lld0 = new ArrayDeque<>();
+        Deque<String> ad0 = new ArrayDeque<>();
         String placeholderCheck = "";
 
-        lld0.addLast("good");
-        lld0.addLast("things");
-        lld0.addLast("fall");
-        lld0.addLast("apart");
+        ad0.addLast("good");
+        ad0.addLast("things");
+        ad0.addLast("fall");
+        ad0.addLast("apart");
 
-        for (String i : lld0) {
+        for (String i : ad0) {
             placeholderCheck += i;
             placeholderCheck += " "; // whitespace
         }

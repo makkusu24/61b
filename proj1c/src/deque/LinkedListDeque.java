@@ -145,7 +145,7 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public String toString() {
-        
+        return null;
     }
 
 }
