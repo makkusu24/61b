@@ -192,4 +192,14 @@ public class ArrayDeque<T> implements Deque<T> {
         return null;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return null;
+    }
+
 }
