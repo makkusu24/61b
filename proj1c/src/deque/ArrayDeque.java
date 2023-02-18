@@ -30,7 +30,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     public static void main(String[] args) {
         Deque<String> ad = new ArrayDeque<>();
-        Deque<String> identical = new ArrayDeque<>();
+        Deque<String> identical = new LinkedListDeque<>();
         ad.addLast("hello");
         ad.addLast("human");
         System.out.println(ad);
@@ -205,7 +205,7 @@ public class ArrayDeque<T> implements Deque<T> {
     private class ArrayDequeIterator implements Iterator<T> {
         private int adPos;
         public ArrayDequeIterator() {
-            adPos = 0;
+            adPos = front;
         }
         @Override
         public boolean hasNext() {
@@ -221,7 +221,7 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     public boolean contains(T x) {
-        for (int i = 0; i < size; i ++) {
+        for (int i = 0; i < size; i++) {
             if (items[i].equals(x)) {
                 return true;
             }
@@ -237,6 +237,17 @@ public class ArrayDeque<T> implements Deque<T> {
             }
             for (T x : this) {
                 if (!other.contains(x)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        else if (object instanceof LinkedListDeque otherL) {
+            if (otherL.size() != this.size) {
+                return false;
+            }
+            for (T x : this) {
+                if (!otherL.contains(x)) {
                     return false;
                 }
             }
