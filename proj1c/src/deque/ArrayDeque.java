@@ -30,12 +30,16 @@ public class ArrayDeque<T> implements Deque<T> {
 
     public static void main(String[] args) {
         Deque<String> ad = new ArrayDeque<>();
+        Deque<String> identical = new ArrayDeque<>();
         ad.addLast("hello");
         ad.addLast("human");
         System.out.println(ad);
         for (String s : ad) {
             System.out.println(s);
         }
+        identical.addLast("hello");
+        identical.addLast("human");
+        System.out.println(ad.equals(identical));
     }
 
     /**
@@ -216,10 +220,29 @@ public class ArrayDeque<T> implements Deque<T> {
         }
     }
 
+    public boolean contains(T x) {
+        for (int i = 0; i < size; i ++) {
+            if (items[i].equals(x)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object object) {
-
-        return true;
+        if (object instanceof ArrayDeque other) {
+            if (other.size != this.size) {
+                return false;
+            }
+            for (T x : this) {
+                if (!other.contains(x)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override

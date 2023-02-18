@@ -34,12 +34,16 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
     public static void main(String[] args) {
         Deque<String> lld = new LinkedListDeque<>();
+        Deque<String> identical = new LinkedListDeque<>();
         lld.addLast("hello");
         lld.addLast("human");
         System.out.println(lld.toList());
         for (String s : lld) {
             System.out.println(s);
         }
+        identical.addLast("hello");
+        identical.addLast("human");
+        System.out.println(lld.equals(identical));
     }
 
     @Override
@@ -162,10 +166,29 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
     }
 
+    public boolean contains(T x) {
+        for (T s : this) {
+            if (s.equals(x)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object object) {
-
-        return true;
+        if (object instanceof LinkedListDeque other) {
+            if (other.size != this.size) {
+                return false;
+            }
+            for (T x : this) {
+                if (!other.contains(x)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override
