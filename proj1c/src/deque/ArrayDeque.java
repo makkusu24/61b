@@ -33,6 +33,9 @@ public class ArrayDeque<T> implements Deque<T> {
         ad.addLast("hello");
         ad.addLast("human");
         System.out.println(ad);
+        for (String s : ad) {
+            System.out.println(s);
+        }
     }
 
     /**
@@ -191,11 +194,31 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+
+        return new ArrayDequeIterator();
+    }
+
+    private class ArrayDequeIterator implements Iterator<T> {
+        private int adPos;
+        public ArrayDequeIterator() {
+            adPos = 0;
+        }
+        @Override
+        public boolean hasNext() {
+            return adPos < size;
+        }
+
+        @Override
+        public T next() {
+            T returnItem = items[adPos];
+            adPos += 1;
+            return returnItem;
+        }
     }
 
     @Override
     public boolean equals(Object object) {
+
         return true;
     }
 

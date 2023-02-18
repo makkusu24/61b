@@ -37,6 +37,9 @@ public class LinkedListDeque<T> implements Deque<T> {
         lld.addLast("hello");
         lld.addLast("human");
         System.out.println(lld.toList());
+        for (String s : lld) {
+            System.out.println(s);
+        }
     }
 
     @Override
@@ -137,11 +140,31 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+
+        return new LinkedListDequeIterator();
+    }
+
+    private class LinkedListDequeIterator implements Iterator<T> {
+        private int adPos;
+        public LinkedListDequeIterator() {
+            adPos = 0;
+        }
+        @Override
+        public boolean hasNext() {
+            return adPos < size;
+        }
+
+        @Override
+        public T next() {
+            T returnItem = get(adPos);
+            adPos += 1;
+            return returnItem;
+        }
     }
 
     @Override
     public boolean equals(Object object) {
+
         return true;
     }
 
