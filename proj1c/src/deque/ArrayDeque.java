@@ -209,7 +209,7 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         @Override
         public boolean hasNext() {
-            return adPos < size;
+            return adPos < back;
         }
 
         @Override
@@ -221,8 +221,8 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     public boolean contains(T x) {
-        for (int i = 0; i < size; i++) {
-            if (items[i].equals(x)) {
+        for (T s : this) {
+            if (s.equals(x)) {
                 return true;
             }
         }
