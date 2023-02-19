@@ -241,8 +241,7 @@ public class ArrayDeque<T> implements Deque<T> {
                 }
             }
             return true;
-        }
-        else if (object instanceof LinkedListDeque otherL) {
+        } else if (object instanceof LinkedListDeque otherL) {
             if (otherL.size() != this.size) {
                 return false;
             }
@@ -252,8 +251,9 @@ public class ArrayDeque<T> implements Deque<T> {
                 }
             }
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     @Override

@@ -197,8 +197,9 @@ public class LinkedListDeque<T> implements Deque<T> {
                 }
             }
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     @Override
