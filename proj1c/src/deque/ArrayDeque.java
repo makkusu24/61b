@@ -209,13 +209,13 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         @Override
         public boolean hasNext() {
-            return (adPos % items.length) < back;
+            return adPos == back;
         }
 
         @Override
         public T next() {
             T returnItem = items[adPos % items.length];
-            adPos += 1;
+            adPos = (adPos + 1) % items.length;
             return returnItem;
         }
     }
