@@ -44,6 +44,7 @@ public class Percolation {
         if (col != (dimension - 1) && isOpen(row, col + 1)) {
             uf.union(p, xyTo1D(row, col + 1));
         }
+        openCount += 1;
     }
 
     public boolean isOpen(int row, int col) {
@@ -70,7 +71,7 @@ public class Percolation {
     }
 
     public int xyTo1D(int r, int c) {
-        return ((r * (r + 1)) - 1) + (c + 1);
+        return r * dimension + c; //((r * (r + 1)) - 1) + (c + 1);
     }
 
     private void validate(int p) {
