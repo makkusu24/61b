@@ -209,7 +209,7 @@ public class ArrayDeque<T> implements Deque<T> {
         }
         @Override
         public boolean hasNext() {
-            return adPos <= size;
+            return adPos < size;
         }
 
         @Override

@@ -176,8 +176,8 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object instanceof LinkedListDeque other) {
+    public boolean equals(Object o) {
+        if (o instanceof LinkedListDeque other) {
             if (other.size != this.size) {
                 return false;
             }
@@ -187,7 +187,7 @@ public class LinkedListDeque<T> implements Deque<T> {
                 }
             }
             return true;
-        } else if (object instanceof ArrayDeque otherL) {
+        } else if (o instanceof ArrayDeque otherL) {
             if (otherL.size() != this.size) {
                 return false;
             }
