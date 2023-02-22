@@ -5,7 +5,7 @@ public class Percolation {
     private int length;
     private int topSite;
     private int bottomSite;
-    private int open;
+    private boolean[] open;
     private int openCount;
     private int dimension;
 
@@ -13,11 +13,15 @@ public class Percolation {
         if (N <= 0) {
             throw new java.lang.IllegalArgumentException();
         }
-        this.uf = new WeightedQuickUnionUF(N * N + 3);
-        this.length = N * N + 3;
-        this.topSite = length - 3;
-        this.bottomSite = length - 2;
-        this.open = length - 1; // open connects to topSite -> game over
+        this.uf = new WeightedQuickUnionUF(N * N + 2);
+        this.length = N * N + 2;
+        this.topSite = length - 2;
+        this.bottomSite = length - 1;
+        //this.open = length - 1; // open connects to topSite -> game over
+        this.open = new boolean[length - 2];
+        for (int i = 0; i < length - 2; i++) {
+            this.open[i] = false;
+        }
         this.openCount = 0;
         this.dimension = N;
     }
@@ -28,7 +32,7 @@ public class Percolation {
         if (!isOpen(row, col)) {
             openCount += 1;
         }
-        uf.union(p, open);
+        open[p] = true;
         if (row == 0) { // add top row to top site
             uf.union(p, topSite);
         }
@@ -52,10 +56,7 @@ public class Percolation {
     public boolean isOpen(int row, int col) {
         int p = xyTo1D(row, col);
         validate(p);
-        if (uf.connected(p, open)) {
-            return true;
-        }
-        return false;
+        return open[p];
     }
 
     public boolean isFull(int row, int col) {
@@ -78,7 +79,7 @@ public class Percolation {
     }
 
     private void validate(int p) {
-        if (p < 0 || p >= length - 3) {
+        if (p < 0 || p >= length - 2) {
             throw new java.lang.IndexOutOfBoundsException();
         }
     }
