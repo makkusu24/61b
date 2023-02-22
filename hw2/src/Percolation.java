@@ -37,16 +37,16 @@ public class Percolation {
         int p = xyTo1D(row, col);
         validate(p);
         uf.union(p, open);
-        if (row != 0) {
+        if (row != 0 && isOpen(row - 1, col)) {
             uf.union(p, xyTo1D(row - 1, col));
         }
-        if (row != dimension - 1) {
+        if (row != (dimension - 1) && isOpen(row + 1, col)) {
             uf.union(p, xyTo1D(row + 1, col));
         }
-        if (col != 0) {
+        if (col != 0 && isOpen(row, col - 1)) {
             uf.union(p, xyTo1D(row, col - 1));
         }
-        if (col != dimension - 1) {
+        if (col != (dimension - 1) && isOpen(row, col + 1)) {
             uf.union(p, xyTo1D(row, col + 1));
         }
     }
