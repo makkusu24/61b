@@ -20,23 +20,31 @@ public class Percolation {
         this.open = length - 1;
         this.openCount = 0;
         this.dimension = N;
+        /**
         for (int i = 0; i < N; i++) { // connect top row to top site
             uf.union(i, topSite);
         }
         for (int i = length - 4; i > length - 4 - N; i--) { // connect bottom row to bottom site
             uf.union(i, bottomSite);
         }
+         */
     }
 
     public void open(int row, int col) {
         int p = xyTo1D(row, col);
         validate(p);
         uf.union(p, open);
+        if (row == 0) { // add top row to top site
+            uf.union(p, topSite);
+        }
         if (row != 0 && isOpen(row - 1, col)) {
             uf.union(p, xyTo1D(row - 1, col));
         }
         if (row != (dimension - 1) && isOpen(row + 1, col)) {
             uf.union(p, xyTo1D(row + 1, col));
+        }
+        if (row == dimension - 1) { // add bottom row to bottom site
+            uf.union(p, bottomSite);
         }
         if (col != 0 && isOpen(row, col - 1)) {
             uf.union(p, xyTo1D(row, col - 1));
@@ -71,7 +79,7 @@ public class Percolation {
     }
 
     public int xyTo1D(int r, int c) {
-        return r * dimension + c; //((r * (r + 1)) - 1) + (c + 1);
+        return r * dimension + c;
     }
 
     private void validate(int p) {
