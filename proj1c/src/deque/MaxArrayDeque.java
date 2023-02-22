@@ -25,6 +25,9 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
         mad.addLast(2);
         mad.addLast(3);
         mad.addLast(4);
+        for (int i = 0; i <= 100; i++) {
+            mad.addLast(i);
+        }
         System.out.println(mad.max());
         System.out.println(mad.max(ic));
     }
