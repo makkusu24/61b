@@ -73,7 +73,7 @@ public class Percolation {
         return uf.connected(topSite, bottomSite);
     }
 
-    public int xyTo1D(int r, int c) {
+    private int xyTo1D(int r, int c) {
         return r * dimension + c;
     }
 
