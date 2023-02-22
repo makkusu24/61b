@@ -38,7 +38,7 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
         }
         T max = this.get(0);
         for (T element : this) {
-            if (this.comparator.compare(element, max) == 1) {
+            if (this.comparator.compare(element, max) > 0) {
                 max = element;
             }
         }
@@ -51,7 +51,7 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
         }
         T max = this.get(0);
         for (T element : this) {
-            if (c.compare(element, max) == 1) {
+            if (c.compare(element, max) > 0) {
                 max = element;
             }
         }
