@@ -205,17 +205,17 @@ public class ArrayDeque<T> implements Deque<T> {
     private class ArrayDequeIterator implements Iterator<T> {
         private int adPos;
         public ArrayDequeIterator() {
-            adPos = front;
+            adPos = 0;
         }
         @Override
         public boolean hasNext() {
-            return adPos == back;
+            return adPos < size;
         }
 
         @Override
         public T next() {
-            T returnItem = items[adPos % items.length];
-            adPos = (adPos + 1) % items.length;
+            T returnItem = get(adPos);
+            adPos += 1;
             return returnItem;
         }
     }
