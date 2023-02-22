@@ -28,11 +28,6 @@ public class Percolation {
         }
     }
 
-    public static void main(String[] args) {
-        Percolation perc = new Percolation(5);
-        Percolation perc1 = new Percolation(9);
-    }
-
     public void open(int row, int col) {
         int p = xyTo1D(row, col);
         validate(p);

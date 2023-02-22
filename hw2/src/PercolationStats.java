@@ -2,7 +2,6 @@ import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 
 public class PercolationStats {
-    /*
     private double mean;
     private double stddev;
     private double T;
@@ -43,7 +42,7 @@ public class PercolationStats {
         return mean + 1.96 * stddev / Math.sqrt(T);
     }
 
-    private static void main(String[] args) {
+    public static void main(String[] args) {
         int trials = 100, gridSize = 50;
         PercolationFactory pf = new PercolationFactory();
         PercolationStats ps = new PercolationStats(gridSize, trials, pf);
@@ -52,5 +51,5 @@ public class PercolationStats {
         System.out.printf("The standard deviation of the percolation threshold is %.2f.%n", ps.stddev());
         System.out.printf("The 95%% confidence interval is [%.3f, %.3f].%n", ps.confidenceLow(), ps.confidenceHigh());
     }
-    */
+
 }
