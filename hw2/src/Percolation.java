@@ -17,7 +17,6 @@ public class Percolation {
         this.length = N * N + 2;
         this.topSite = length - 2;
         this.bottomSite = length - 1;
-        //this.open = length - 1; // open connects to topSite -> game over
         this.open = new boolean[length - 2];
         for (int i = 0; i < length - 2; i++) {
             this.open[i] = false;
@@ -63,7 +62,7 @@ public class Percolation {
         int p = xyTo1D(row, col);
         validate(p);
         return uf.connected(p, topSite);
-        // Prevent backwash (connected to bottom but not top
+        // Prevent backwash (connected to bottom but not top)
     }
 
     public int numberOfOpenSites() {
