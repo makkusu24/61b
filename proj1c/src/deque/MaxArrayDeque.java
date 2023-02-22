@@ -26,6 +26,7 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
         mad.addLast(3);
         mad.addLast(4);
         System.out.println(mad.max());
+        System.out.println(mad.max(ic));
     }
 
     public T max() {
@@ -34,7 +35,7 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
         }
         T max = this.get(0);
         for (T element : this) {
-            if (comparator.compare(element, max) == 1) {
+            if (this.comparator.compare(element, max) == 1) {
                 max = element;
             }
         }
@@ -52,6 +53,11 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
             }
         }
         return max;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return true;
     }
 
 }

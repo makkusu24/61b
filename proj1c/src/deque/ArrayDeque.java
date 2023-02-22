@@ -214,7 +214,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
         @Override
         public T next() {
-            T returnItem = items[adPos];
+            T returnItem = items[adPos % items.length];
             adPos += 1;
             return returnItem;
         }
@@ -230,8 +230,8 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (object instanceof ArrayDeque other) {
+    public boolean equals(Object o) {
+        if (o instanceof ArrayDeque other) {
             if (other.size != this.size) {
                 return false;
             }
@@ -241,7 +241,7 @@ public class ArrayDeque<T> implements Deque<T> {
                 }
             }
             return true;
-        } else if (object instanceof LinkedListDeque otherL) {
+        } else if (o instanceof LinkedListDeque otherL) {
             if (otherL.size() != this.size) {
                 return false;
             }
