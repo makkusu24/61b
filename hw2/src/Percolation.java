@@ -15,7 +15,7 @@ public class Percolation {
             throw new java.lang.IllegalArgumentException();
         }
         this.uf = new WeightedQuickUnionUF(N * N + 2);
-        this.ufBackwash = new WeightedQuickUnionUF(N * N + 1); // H
+        this.ufBackwash = new WeightedQuickUnionUF(N * N + 1);
         this.length = N * N + 2;
         this.topSite = length - 2;
         this.bottomSite = length - 1;
@@ -23,9 +23,7 @@ public class Percolation {
         for (int i = 0; i < length - 2; i++) {
             this.open[i] = false;
         }
-        for (int i = 0; i < dimension; i++) { // H
-            //uf.union(topSite, xyTo1D(0, i));
-            //uf.union(bottomSite, xyTo1D(dimension - 1, i));
+        for (int i = 0; i < dimension; i++) {
             ufBackwash.union(topSite, xyTo1D(0, i));
         }
         this.openCount = 0;
@@ -45,11 +43,11 @@ public class Percolation {
         }
         if (row != 0 && isOpen(row - 1, col)) { // not top row
             uf.union(p, xyTo1D(row - 1, col));
-            ufBackwash.union(p, xyTo1D(row - 1, col)); // H
+            ufBackwash.union(p, xyTo1D(row - 1, col));
         }
         if (row != (dimension - 1) && isOpen(row + 1, col)) { // not bottom row
             uf.union(p, xyTo1D(row + 1, col));
-            ufBackwash.union(p, xyTo1D(row + 1, col)); // H
+            ufBackwash.union(p, xyTo1D(row + 1, col));
         }
         if (row == dimension - 1) { // add bottom row to bottom site
             uf.union(p, bottomSite);
@@ -73,9 +71,7 @@ public class Percolation {
     public boolean isFull(int row, int col) {
         int p = xyTo1D(row, col);
         validate(p);
-        //return uf.connected(p, topSite);
         return open[p] && ufBackwash.connected(topSite, p);
-        // Prevent backwash (connected to bottom but not top)
     }
 
     public int numberOfOpenSites() {
