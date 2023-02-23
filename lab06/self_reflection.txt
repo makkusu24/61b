@@ -16,15 +16,15 @@ A:
 
 Q: What did you learn by talking to your partner about writing ArrayDeque?
 
-A:
+A: (***) We learned that we should better improve our unit testing. Just because we had dense code in our test files doesn't mean they were quality and covering a lot of edge cases. We both acknowledged that we relied a lot on the Autograder results to see what direction we should go with tweaking our code.
 
 Q: What do you wish you would have known before writing ArrayDeque, if anything?
 
-A:
+A: (***) I wish I fully understood the circular design of the front and back pointers when I first started. I feel like there would be a lot less trial and error and I would be more confident about how to approach certain parts of the project, like implementing the resize() method.
 
 Q: If you wrote ArrayDeque again, what would you do differently, if anything?
 
-A:
+A: (***) If I wrote ArrayDeque again, I would try to write more docstrings and comments on particularly hard to understand lines of code. I felt that sometimes if I stopped working on the project and picked it back up again, I would have to read a lot of parts again just to get back up to pace.
 
 -----
 
@@ -32,11 +32,11 @@ LinkedListDeque:
 
 Q: Give an example of at least one idea from the staff solution that would have made your solution better (if any).
 
-A: 
+A: (***) It's not a conceptual idea, but I learned there's more room for me to improve stylistically. For example, in isEmpty(), the staff solution just uses the boolean return of size == 0. In my code, however, I used an if statement to check sentinel.next == sentinel. I think size == 0 is much more readable and streamlined.
 
 Q: What's something you felt proud of in your code, if anything?
 
-A:
+A: (***) It felt good to see all the green on the Autograder tests.
 
 Q: What's something that was particularly inelegant in your code, if anything?
 
@@ -44,15 +44,15 @@ A:
 
 Q: What did you learn by talking to your partner about writing LinkedListDeque?
 
-A:
+A: (***) I learned that other people are also struggling and taking time to finish these projects. I was a bit stressed by a small subset of my classmates who say that it shouldn't take longer than an hour, etc.
 
 Q: What do you wish you would have known before writing LinkedListDeque, if anything?
 
-A:
+A: 
 
 Q: If you wrote LinkedListDeque again, what would you do differently, if anything?
 
-A:
+A: (***) Copying my answer from ArrayDeque reflections, I would definitely add more comments and docstring comments to make it easier to understand if I ever come back to my code.
 
 -----
 
@@ -60,4 +60,4 @@ Meta:
 
 Q: Did you like this design review process? Anything we should do differently next time?
 
-A: 
+A: (***) I don't think it should be a mandatory lab. I think this works better as an optional exercise.
