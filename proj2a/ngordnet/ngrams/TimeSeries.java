@@ -14,7 +14,6 @@ public class TimeSeries extends TreeMap<Integer, Double> {
 
     private static final int MIN_YEAR = 1400;
     private static final int MAX_YEAR = 2100;
-    // TODO: Add any necessary static/instance variables.
 
     /**
      * Constructs a new empty TimeSeries.
@@ -44,8 +43,7 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      * Must be in the same order as years().
      */
     public List<Double> data() {
-        // TODO: Fill in this method.
-        return null;
+        return new ArrayList<>(this.values());
     }
 
     /**
@@ -58,8 +56,28 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      * should store the value from the TimeSeries that contains that year.
      */
     public TimeSeries plus(TimeSeries ts) {
-        // TODO: Fill in this method.
-        return null;
+        TimeSeries summedMap = new TimeSeries();
+        Integer localMin = this.firstKey();
+        Integer localMax = this.lastKey();
+        if (this.keySet().size() == 0 && ts.keySet().size() == 0) {
+            return summedMap;
+        }
+        if (this.firstKey() > ts.firstKey()) {
+            localMin = ts.firstKey();
+        }
+        if (this.lastKey() < ts.lastKey()) {
+            localMax = ts.lastKey();
+        }
+        for (int i = localMin; i <= localMax; i++) {
+            if (this.containsKey(i) && !ts.containsKey(i)) {
+                summedMap.put(i, this.get(i));
+            } else if (!this.containsKey(i) && ts.containsKey(i)) {
+                summedMap.put(i, ts.get(i));
+            } else if (this.containsKey(i) && ts.containsKey(i)) {
+                summedMap.put(i, this.get(i) + ts.get(i));
+            }
+        }
+        return summedMap;
     }
 
     /**
@@ -72,10 +90,14 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      * If TS has a year that is not in this TimeSeries, ignore it.
      */
     public TimeSeries dividedBy(TimeSeries ts) {
-        // TODO: Fill in this method.
-        return null;
+        TimeSeries summedMap = new TimeSeries();
+        for (Integer key : this.keySet()) {
+            if (!ts.containsKey(key)) {
+                throw new IllegalArgumentException();
+            }
+            summedMap.put(key, this.get(key) / ts.get(key));
+        }
+        return summedMap;
     }
-
-    // TODO: Add any private helper methods.
 
 }
