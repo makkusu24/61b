@@ -1,5 +1,6 @@
 package ngordnet.ngrams;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -28,15 +29,14 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries(TimeSeries ts, int startYear, int endYear) {
         super();
-        // TODO: Fill in this constructor.
+        this.putAll(ts.subMap(startYear, true,  endYear, true));
     }
 
     /**
      * Returns all years for this TimeSeries (in any order).
      */
     public List<Integer> years() {
-        // TODO: Fill in this method.
-        return null;
+        return new ArrayList<>(this.keySet());
     }
 
     /**
@@ -77,5 +77,5 @@ public class TimeSeries extends TreeMap<Integer, Double> {
     }
 
     // TODO: Add any private helper methods.
-    // TODO: Remove all TODO comments before submitting.
+
 }
