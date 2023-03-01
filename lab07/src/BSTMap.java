@@ -55,6 +55,9 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         if (x == null) {
             return null;
         }
+        if (x.key == null) {
+            return null;
+        }
         int cmp = key.compareTo(x.key);
         if (cmp < 0) {
             return get(x.left, key);
@@ -75,6 +78,12 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     private boolean containsKey(Node x, K key) {
         if (root == null) {
+            return false;
+        }
+        if (x == null) {
+            return false;
+        }
+        if (x.key == null) {
             return false;
         }
         int cmp = key.compareTo(x.key);
@@ -101,8 +110,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     @Override
     public void clear() {
-        this.root = null;
-        this.root.size = 0;
+        this.root = new Node(null, null, 0);
     }
 
     @Override
