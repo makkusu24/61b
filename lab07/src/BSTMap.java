@@ -70,7 +70,21 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         if (key == null) {
             throw new IllegalArgumentException();
         }
-        return get(key) != null;
+        return containsKey(root, key);
+    }
+
+    private boolean containsKey(Node x, K key) {
+        if (root == null) {
+            return false;
+        }
+        int cmp = key.compareTo(x.key);
+        if (cmp < 0) {
+            return containsKey(x.left, key);
+        } else if (cmp > 0) {
+            return containsKey(x.right, key);
+        } else {
+            return true;
+        }
     }
 
     @Override
