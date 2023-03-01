@@ -1,6 +1,7 @@
 package ngordnet.ngrams;
 
 import java.util.Collection;
+import java.util.StringTokenizer;
 
 /**
  * An object that provides utility methods for making queries on the
@@ -16,13 +17,16 @@ public class NGramMap {
 
     private static final int MIN_YEAR = 1400;
     private static final int MAX_YEAR = 2100;
-    // TODO: Add any necessary static/instance variables.
 
     /**
      * Constructs an NGramMap from WORDSFILENAME and COUNTSFILENAME.
      */
-    public NGramMap(String wordsFilename, String countsFilename) {
-        // TODO: Fill in this constructor. See the "NGramMap Tips" section of the spec for help.
+    public NGramMap(String wordsFilename, String countsFilename) { // HashMap<String, TimeSeries> ???
+        StringTokenizer wordsTokenizer = new StringTokenizer(wordsFilename, " ");
+        StringTokenizer countsTokenizer = new StringTokenizer(countsFilename, ",");
+        while (wordsTokenizer.hasMoreTokens()) {
+            String token = wordsTokenizer.nextToken();
+        }
     }
 
     /**
@@ -93,6 +97,4 @@ public class NGramMap {
         return null;
     }
 
-    // TODO: Add any private helper methods.
-    // TODO: Remove all TODO comments before submitting.
 }
