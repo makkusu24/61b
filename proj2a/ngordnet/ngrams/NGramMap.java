@@ -1,5 +1,8 @@
 package ngordnet.ngrams;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
@@ -25,24 +28,41 @@ public class NGramMap {
      * Constructs an NGramMap from WORDSFILENAME and COUNTSFILENAME.
      */
     public NGramMap(String wordsFilename, String countsFilename) {
+        String contentWords = null;
+        String contentCounts = null;
+        try {
+            contentWords = new String(Files.readAllBytes(Paths.get(wordsFilename)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            contentCounts = new String(Files.readAllBytes(Paths.get(countsFilename)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         this.wordRepo = new HashMap<>();
         this.countRepo = new TimeSeries();
-        StringTokenizer wordsTokenizer = new StringTokenizer(wordsFilename, "\n");
-        StringTokenizer countsTokenizer = new StringTokenizer(countsFilename, "\n");
-        while (wordsTokenizer.hasMoreTokens() && !wordsTokenizer.nextToken().isEmpty()) { // parse words file
+        StringTokenizer wordsTokenizer = new StringTokenizer(contentWords, "\n");
+        StringTokenizer countsTokenizer = new StringTokenizer(contentCounts, "\n");
+        while (wordsTokenizer.hasMoreTokens()) { // parse words file
             String token = wordsTokenizer.nextToken();
-            String[] subToken = token.split("[\t ]+");
-            if (wordRepo.containsKey(subToken[0])) {
-                wordRepo.get(subToken[0]).put(Integer.parseInt(subToken[1]), Double.parseDouble(subToken[2]));
-            } else {
-                TimeSeries tempEntry = new TimeSeries();
-                wordRepo.put(subToken[0], tempEntry);
+            if (!token.isEmpty()) {
+                String[] subToken = token.split("[\t ]+");
+                if (wordRepo.containsKey(subToken[0])) {
+                    wordRepo.get(subToken[0]).put(Integer.parseInt(subToken[1]), Double.parseDouble(subToken[2]));
+                } else {
+                    TimeSeries tempEntry = new TimeSeries();
+                    tempEntry.put(Integer.parseInt(subToken[1]), Double.parseDouble(subToken[2]));
+                    wordRepo.put(subToken[0], tempEntry);
+                }
             }
         }
-        while (countsTokenizer.hasMoreTokens() && !wordsTokenizer.nextToken().isEmpty()) { // parse counts file
+        while (countsTokenizer.hasMoreTokens()) { // parse counts file
             String token = countsTokenizer.nextToken();
-            String[] subToken = token.split(",");
-            countRepo.put(Integer.parseInt(subToken[0]), Double.parseDouble(subToken[1]));
+            if (!token.isEmpty()) {
+                String[] subToken = token.split(",");
+                countRepo.put(Integer.parseInt(subToken[0]), Double.parseDouble(subToken[1]));
+            }
         }
     }
 
