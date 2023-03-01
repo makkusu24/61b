@@ -1,0 +1,11 @@
+For random inserts of 10,000 strings of 100 length each, our naive BSTMap map took 0.01 seconds compared to Java's TreeMap and HashMap's 0.01 seconds.
+61B's Linked List Map took 0.48 seconds.
+
+For random inserts of 100,000 strings of 100 length each, there was a Stack Overflow error and runtime stopped prematurely.
+However, our naive BSTMap took 0.12 seconds, whereas Java's built-in maps took 0.11 seconds, at whatever string count Intellij stopped at.
+
+For ordered inserts of 10,000 strings (no specified string length because lexicographical ascending order is determined), our naive BSTMap took 0.46 seconds compared to
+Java's TreeMap and HashMap's 0.01 and 0.00 seconds, respectively.
+
+For random inserts of 100,000 strings, there was a Stack Overflow error and runtime stopped prematurely. There were no results for our
+naive BSTMap, but Java's TreeMap and HashMap got 0.04 seconds and 0.02 seconds, respectively.
