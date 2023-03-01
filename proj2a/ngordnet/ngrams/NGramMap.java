@@ -1,6 +1,7 @@
 package ngordnet.ngrams;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 /**
@@ -17,15 +18,31 @@ public class NGramMap {
 
     private static final int MIN_YEAR = 1400;
     private static final int MAX_YEAR = 2100;
+    private HashMap<String, TimeSeries> wordRepo;
+    private TimeSeries countRepo;
 
     /**
      * Constructs an NGramMap from WORDSFILENAME and COUNTSFILENAME.
      */
-    public NGramMap(String wordsFilename, String countsFilename) { // HashMap<String, TimeSeries> ???
-        StringTokenizer wordsTokenizer = new StringTokenizer(wordsFilename, " ");
-        StringTokenizer countsTokenizer = new StringTokenizer(countsFilename, ",");
-        while (wordsTokenizer.hasMoreTokens()) {
+    public NGramMap(String wordsFilename, String countsFilename) {
+        this.wordRepo = new HashMap<>();
+        this.countRepo = new TimeSeries();
+        StringTokenizer wordsTokenizer = new StringTokenizer(wordsFilename, "\n");
+        StringTokenizer countsTokenizer = new StringTokenizer(countsFilename, "\n");
+        while (wordsTokenizer.hasMoreTokens() && !wordsTokenizer.nextToken().isEmpty()) { // parse words file
             String token = wordsTokenizer.nextToken();
+            String[] subToken = token.split("[\t ]+");
+            if (wordRepo.containsKey(subToken[0])) {
+                wordRepo.get(subToken[0]).put(Integer.parseInt(subToken[1]), Double.parseDouble(subToken[2]));
+            } else {
+                TimeSeries tempEntry = new TimeSeries();
+                wordRepo.put(subToken[0], tempEntry);
+            }
+        }
+        while (countsTokenizer.hasMoreTokens() && !wordsTokenizer.nextToken().isEmpty()) { // parse counts file
+            String token = countsTokenizer.nextToken();
+            String[] subToken = token.split(",");
+            countRepo.put(Integer.parseInt(subToken[0]), Double.parseDouble(subToken[1]));
         }
     }
 
@@ -36,8 +53,9 @@ public class NGramMap {
      * NGramMap. This is also known as a "defensive copy".
      */
     public TimeSeries countHistory(String word, int startYear, int endYear) {
-        // TODO: Fill in this method.
-        return null;
+        TimeSeries defaultTS = wordRepo.get(word);
+        TimeSeries returnTS = new TimeSeries(defaultTS, startYear, endYear);
+        return returnTS;
     }
 
     /**
@@ -47,16 +65,14 @@ public class NGramMap {
      * NGramMap. This is also known as a "defensive copy".
      */
     public TimeSeries countHistory(String word) {
-        // TODO: Fill in this method.
-        return null;
+        return wordRepo.get(word);
     }
 
     /**
      * Returns a defensive copy of the total number of words recorded per year in all volumes.
      */
     public TimeSeries totalCountHistory() {
-        // TODO: Fill in this method.
-        return null;
+        return countRepo;
     }
 
     /**
