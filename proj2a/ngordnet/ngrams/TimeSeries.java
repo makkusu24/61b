@@ -57,18 +57,10 @@ public class TimeSeries extends TreeMap<Integer, Double> {
      */
     public TimeSeries plus(TimeSeries ts) {
         TimeSeries summedMap = new TimeSeries();
-        Integer localMin = this.firstKey();
-        Integer localMax = this.lastKey();
         if (this.keySet().size() == 0 && ts.keySet().size() == 0) {
             return summedMap;
         }
-        if (this.firstKey() > ts.firstKey()) {
-            localMin = ts.firstKey();
-        }
-        if (this.lastKey() < ts.lastKey()) {
-            localMax = ts.lastKey();
-        }
-        for (int i = localMin; i <= localMax; i++) {
+        for (int i = java.lang.Math.min(this.firstKey(), ts.firstKey()); i <= java.lang.Math.max(this.lastKey(), ts.lastKey()); i++) {
             if (this.containsKey(i) && !ts.containsKey(i)) {
                 summedMap.put(i, this.get(i));
             } else if (!this.containsKey(i) && ts.containsKey(i)) {
