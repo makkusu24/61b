@@ -115,7 +115,7 @@ public class NGramMap {
      * TimeSeries.
      */
     public TimeSeries weightHistory(String word) {
-        return countHistory(word).dividedBy(totalCountHistory());
+        return weightHistory(word, MIN_YEAR, MAX_YEAR);
     }
 
     /**
@@ -143,18 +143,7 @@ public class NGramMap {
      * Returns the summed relative frequency per year of all words in WORDS.
      */
     public TimeSeries summedWeightHistory(Collection<String> words) {
-        TimeSeries returnTS = new TimeSeries();
-        for (String word : words) {
-            if (wordRepo.containsKey(word)) {
-                if (returnTS.isEmpty()) {
-                    returnTS = weightHistory(word);
-                } else {
-                    TimeSeries tempTS = weightHistory(word);
-                    returnTS = returnTS.plus(tempTS);
-                }
-            }
-        }
-        return returnTS;
+        return summedWeightHistory(words, MIN_YEAR, MAX_YEAR);
     }
 
 }
