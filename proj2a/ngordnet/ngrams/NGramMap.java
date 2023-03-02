@@ -100,9 +100,8 @@ public class NGramMap {
      * and ENDYEAR, inclusive of both ends.
      */
     public TimeSeries weightHistory(String word, int startYear, int endYear) {
-        TimeSeries defaultTS = wordRepo.get(word);
-        TimeSeries returnTS = new TimeSeries(defaultTS, startYear, endYear);
-        return returnTS.dividedBy(countRepo);
+        TimeSeries returnTS = new TimeSeries(countHistory(word), startYear, endYear);
+        return returnTS.dividedBy(totalCountHistory());
     }
 
     /**
@@ -111,7 +110,7 @@ public class NGramMap {
      * TimeSeries.
      */
     public TimeSeries weightHistory(String word) {
-        return wordRepo.get(word).dividedBy(countRepo);
+        return countHistory(word).dividedBy(totalCountHistory());
     }
 
     /**

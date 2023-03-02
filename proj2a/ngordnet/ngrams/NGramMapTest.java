@@ -71,4 +71,19 @@ public class NGramMapTest {
         assertThat(fishPlusDogWeight.get(1865)).isWithin(1E-10).of(expectedFishPlusDogWeight1865);
     }
 
-}  
+    @Test
+    public void summedWeightComprehensive() {
+        NGramMap ngm = new NGramMap("./data/ngrams/top_14377_words.csv",
+                "./data/ngrams/total_counts.csv");
+
+        List<String> words = new ArrayList<>();
+        words.add("come");
+        words.add("around");
+        words.add("again");
+        TimeSeries wordsWeight = ngm.summedWeightHistory(words, 1939, 1945);
+
+        double expectedWordsWeight= (1523846 + 1285599 + 1285599.0) / 6823049937.0;
+        assertThat(wordsWeight.get(1939)).isWithin(1E-10).of(expectedWordsWeight);
+    }
+
+}
