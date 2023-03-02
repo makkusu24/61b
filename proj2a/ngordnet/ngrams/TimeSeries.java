@@ -60,14 +60,16 @@ public class TimeSeries extends TreeMap<Integer, Double> {
         if (this.keySet().size() == 0 && ts.keySet().size() == 0) {
             return summedMap;
         }
-        for (int i = java.lang.Math.min(this.firstKey(), ts.firstKey()); i <= java.lang.Math.max(this.lastKey(), ts.lastKey()); i++) {
+        for (int i = java.lang.Math.min(this.firstKey(), ts.firstKey());
+             i <= java.lang.Math.max(this.lastKey(), ts.lastKey()); i++) {
             if (this.containsKey(i) && !ts.containsKey(i)) {
                 summedMap.put(i, this.get(i));
             } else if (!this.containsKey(i) && ts.containsKey(i)) {
                 summedMap.put(i, ts.get(i));
             } else if (this.containsKey(i) && ts.containsKey(i)) {
                 summedMap.put(i, this.get(i) + ts.get(i));
-            }
+            } // add else case for if neither TimeSeries contains the key (year)?
+            //  summedMap.put(i, this.getOrDefault(i, 0.00) + ts.getOrDefault(i, 0.00)); adds unnecessary years
         }
         return summedMap;
     }
