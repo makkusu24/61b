@@ -73,9 +73,14 @@ public class NGramMap {
      * NGramMap. This is also known as a "defensive copy".
      */
     public TimeSeries countHistory(String word, int startYear, int endYear) {
-        TimeSeries defaultTS = wordRepo.get(word);
-        TimeSeries returnTS = new TimeSeries(defaultTS, startYear, endYear);
-        return returnTS;
+        if (wordRepo.containsKey(word)) {
+            TimeSeries defaultTS = wordRepo.get(word);
+            TimeSeries returnTS = new TimeSeries(defaultTS, startYear, endYear);
+            return returnTS;
+        } else {
+            TimeSeries noneTS = new TimeSeries();
+            return noneTS;
+        }
     }
 
     /**
@@ -85,7 +90,7 @@ public class NGramMap {
      * NGramMap. This is also known as a "defensive copy".
      */
     public TimeSeries countHistory(String word) {
-        return wordRepo.get(word);
+        return countHistory(word, MIN_YEAR, MAX_YEAR);
     }
 
     /**
