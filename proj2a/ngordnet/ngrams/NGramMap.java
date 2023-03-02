@@ -140,11 +140,13 @@ public class NGramMap {
     public TimeSeries summedWeightHistory(Collection<String> words) {
         TimeSeries returnTS = new TimeSeries();
         for (String word : words) {
-            if (returnTS.isEmpty()) {
-                returnTS = weightHistory(word);
-            } else {
-                TimeSeries tempTS = weightHistory(word);
-                returnTS = returnTS.plus(tempTS);
+            if (wordRepo.containsKey(word)) {
+                if (returnTS.isEmpty()) {
+                    returnTS = weightHistory(word);
+                } else {
+                    TimeSeries tempTS = weightHistory(word);
+                    returnTS = returnTS.plus(tempTS);
+                }
             }
         }
         return returnTS;
