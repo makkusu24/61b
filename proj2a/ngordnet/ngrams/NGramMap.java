@@ -122,11 +122,13 @@ public class NGramMap {
                                           int startYear, int endYear) {
         TimeSeries returnTS = new TimeSeries();
         for (String word : words) {
-            if (returnTS.isEmpty()) {
-                returnTS = weightHistory(word, startYear, endYear);
-            } else {
-                TimeSeries tempTS = weightHistory(word, startYear, endYear);
-                returnTS.plus(tempTS);
+            if (wordRepo.containsKey(word)) {
+                if (returnTS.isEmpty()) {
+                    returnTS = weightHistory(word, startYear, endYear);
+                } else {
+                    TimeSeries tempTS = weightHistory(word, startYear, endYear);
+                    returnTS = returnTS.plus(tempTS);
+                }
             }
         }
         return returnTS;
@@ -142,7 +144,7 @@ public class NGramMap {
                 returnTS = weightHistory(word);
             } else {
                 TimeSeries tempTS = weightHistory(word);
-                returnTS.plus(tempTS);
+                returnTS = returnTS.plus(tempTS);
             }
         }
         return returnTS;
