@@ -104,8 +104,11 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      * @param tableSize the size of the table to create
      */
     private Collection<Node>[] createTable(int tableSize) {
-        
-        return null;
+        Collection<Node>[] temp = new Collection[tableSize];
+        for (int i = 0; i < tableSize; i++) {
+            temp[i] = createBucket();
+        }
+        return temp;
     }
 
     // Map 61B Interface implementation below
