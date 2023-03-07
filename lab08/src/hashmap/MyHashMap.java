@@ -32,8 +32,10 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     }
 
     /* Instance Variables */
-    private Collection<Node>[] buckets; // Collection supports add, remove, iterator, .equal() to desired key
+    private Collection<Node>[] buckets;
     private double loadFactor;
+    private int n;
+    private int m;
     private static final int DEFAULT_CAPACITY = 16;
     private static final double DEFAULT_LOADFACTOR = 0.75;
 
@@ -59,6 +61,8 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         }
         this.buckets = createTable(initialCapacity);
         this.loadFactor = loadFactor;
+        this.n = 0;
+        this.m = initialCapacity;
     }
 
     /**
@@ -100,6 +104,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      * @param tableSize the size of the table to create
      */
     private Collection<Node>[] createTable(int tableSize) {
+        
         return null;
     }
 
@@ -108,27 +113,64 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
 
     @Override
     public void put(K key, V value) {
-
+        if ((n / m) > this.loadFactor) {
+            resize(m * 2);
+        }
+        if (!this.containsKey(key)) {
+            this.n += 1;
+        }
+        Node putNode = createNode(key, value);
+        buckets[hash(key)].add(putNode);
     }
 
     @Override
     public V get(K key) {
+        if (!containsKey(key)) {
+            throw new IllegalArgumentException("key not in map");
+        }
+        for (Node node : buckets[hash(key)]) {
+            if (node.key.equals(key)) {
+                return node.value;
+            }
+        }
         return null;
     }
 
     @Override
     public boolean containsKey(K key) {
+        for (Node node : buckets[hash(key)]) {
+            if (node.key.equals(key)) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public int size() {
-        return 0;
+        return this.n;
     }
 
     @Override
     public void clear() {
+        this.buckets = createTable(this.m);
+        this.n = 0;
+    }
 
+    private int hash(K key) {
+        return key.hashCode() % m;
+    }
+
+    private void resize(int newSize) {
+        MyHashMap temp = new MyHashMap(newSize, this.loadFactor);
+        for (int i = 0; i < this.m; i++) {
+            for (Node node : buckets[i]) {
+                temp.put(node.key, node.value);
+            }
+        }
+        this.buckets = temp.buckets;
+        this.n = temp.n;
+        this.m = temp.m;
     }
 
     @Override
