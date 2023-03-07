@@ -91,7 +91,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      * OWN BUCKET DATA STRUCTURES WITH THE NEW OPERATOR!
      */
     protected Collection<Node> createBucket() {
-        return new LinkedList<>();
+        return new LinkedList<Node>();
     }
 
     /**
@@ -104,6 +104,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      * @param tableSize the size of the table to create
      */
     private Collection<Node>[] createTable(int tableSize) {
+
         Collection<Node>[] temp = new Collection[tableSize];
         for (int i = 0; i < tableSize; i++) {
             temp[i] = createBucket();
@@ -116,7 +117,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
 
     @Override
     public void put(K key, V value) {
-        if ((n / m) > this.loadFactor) {
+        if (this.m != 0 && ((double) n / m) > this.loadFactor) {
             resize(m * 2);
         }
         if (!this.containsKey(key)) {
@@ -128,8 +129,12 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
 
     @Override
     public V get(K key) {
+        /*
         if (!containsKey(key)) {
             throw new IllegalArgumentException("key not in map");
+        } */
+        if (buckets == null) {
+            return null;
         }
         for (Node node : buckets[hash(key)]) {
             if (node.key.equals(key)) {
@@ -141,6 +146,9 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
 
     @Override
     public boolean containsKey(K key) {
+        if (buckets == null) {
+            return false;
+        }
         for (Node node : buckets[hash(key)]) {
             if (node.key.equals(key)) {
                 return true;
@@ -161,7 +169,11 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     }
 
     private int hash(K key) {
-        return key.hashCode() % m;
+
+        if (this.m == 0) {
+            return 0;
+        }
+        return Math.floorMod(key.hashCode(), this.m);
     }
 
     private void resize(int newSize) {
