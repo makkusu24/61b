@@ -41,11 +41,11 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
 
     /** Constructors */
     public MyHashMap() {
-        new MyHashMap(DEFAULT_CAPACITY, DEFAULT_LOADFACTOR);
+        this(DEFAULT_CAPACITY, DEFAULT_LOADFACTOR);
     }
 
     public MyHashMap(int initialCapacity) {
-        new MyHashMap(initialCapacity, DEFAULT_LOADFACTOR);
+        this(initialCapacity, DEFAULT_LOADFACTOR);
     }
 
     /**
@@ -70,6 +70,8 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         System.out.println(test.buckets);
         MyHashMap test2 = new MyHashMap<>();
         System.out.println(test2.buckets);
+        MyHashMap test3 = new MyHashMap<>(16);
+        System.out.println(test3.buckets);
     }
 
     /**
@@ -135,8 +137,12 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
 
     @Override
     public V get(K key) {
+        /*
         if (!containsKey(key)) {
             throw new IllegalArgumentException("key not in map");
+        }*/
+        if (buckets == null) {
+            return null;
         }
         for (Node node : buckets[hash(key)]) {
             if (node.key.equals(key)) {
