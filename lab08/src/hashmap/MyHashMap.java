@@ -130,17 +130,19 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         }
         if (!this.containsKey(key)) {
             this.n += 1;
+            Node putNode = createNode(key, value);
+            buckets[hash(key)].add(putNode);
+        } else {
+            for (Node node : buckets[hash(key)]) {
+                if (node.key.equals(key)) {
+                    node.value = value;
+                }
+            }
         }
-        Node putNode = createNode(key, value);
-        buckets[hash(key)].add(putNode);
     }
 
     @Override
     public V get(K key) {
-        /*
-        if (!containsKey(key)) {
-            throw new IllegalArgumentException("key not in map");
-        }*/
         if (buckets == null) {
             return null;
         }

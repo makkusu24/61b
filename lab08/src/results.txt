@@ -1,0 +1,9 @@
+For random inserts of 10,000 strings of 100 length each, our naive Hashmap buckets took 0.03 seconds with ArrayList, 0.02 seconds with
+LinkedList, 0.02 seconds with HashSet, 0.01 seconds with Stack, and 0.01 seconds with ArrayDeque.
+
+For random inserts of 10,000 strings of 100 length each, our naive Hashmap buckets took 0.17 seconds with ArrayList, 0.14 seconds
+with LinkedList, 0.15 seconds with HashSet, 0.14 seconds with Stack, and 0.14 seconds with ArrayDeque.
+
+Comparatively, for InsertInOrderSpeedTest using 10,000 strings to insert in order, ULLMap took 0.51 seconds, our naive
+Hashmap took 0.03 seconds, and Java's built-in Hashmap took 0.01 seconds. For random insertions of the same amount of strings,
+ULLMap took 0.48 seconds, our naive Hashmap took 0.03 seconds, and Java's built-in Hashmap took 0.03 seconds.
