@@ -65,6 +65,13 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
         this.m = initialCapacity;
     }
 
+    public static void main(String[] args) {
+        MyHashMap test = new MyHashMap<>(16, 0.75);
+        System.out.println(test.buckets);
+        MyHashMap test2 = new MyHashMap<>();
+        System.out.println(test2.buckets);
+    }
+
     /**
      * Returns a new node to be placed in a hash table bucket
      */
