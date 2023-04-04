@@ -9,7 +9,8 @@ import tileengine.TETile;
 public class KnightWorld {
 
     private TETile[][] tiles;
-    // TODO: Add additional instance variables here
+    private static final int HEIGHT = 50;
+    private static final int WIDTH = 50;
 
     public KnightWorld(int width, int height, int holeSize) {
         // TODO: Fill in this constructor and class, adding helper methods and/or classes as necessary to draw the
