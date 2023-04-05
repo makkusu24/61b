@@ -2,6 +2,7 @@ package knightworld;
 
 import tileengine.TERenderer;
 import tileengine.TETile;
+import tileengine.Tileset;
 
 /**
  * Draws a world consisting of knight-move holes.
@@ -9,13 +10,23 @@ import tileengine.TETile;
 public class KnightWorld {
 
     private TETile[][] tiles;
-    private static final int HEIGHT = 50;
-    private static final int WIDTH = 50;
+    private int holeSize;
 
     public KnightWorld(int width, int height, int holeSize) {
-        // TODO: Fill in this constructor and class, adding helper methods and/or classes as necessary to draw the
-        //  specified pattern of the given hole size for a window of size width x height. If you're stuck on how to
-        //  begin, look at the provided demo code!
+        this.holeSize = holeSize;
+        TETile[][] tiles = new TETile[width][height];
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                // Place a hole in every other square, offset by one in odd rows
+                if ((x % (holeSize * 2) == 0 && y % (holeSize * 2) == 0)
+                        || (x % (holeSize * 2) == holeSize && y % (holeSize * 2) == holeSize)) {
+                    tiles[x][y] = Tileset.NOTHING;
+                } else {
+                    tiles[x][y] = Tileset.FLOWER;
+                }
+            }
+        }
+        this.tiles = tiles;
     }
 
     /** Returns the tiles associated with this KnightWorld. */
