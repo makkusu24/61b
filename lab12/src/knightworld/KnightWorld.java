@@ -17,7 +17,6 @@ public class KnightWorld {
         TETile[][] tiles = new TETile[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                // Place a hole in every other square, offset by one in odd rows
                 if ((x % (holeSize * 2) == 0 && y % (holeSize * 2) == 0)
                         || (x % (holeSize * 2) == holeSize && y % (holeSize * 2) == holeSize)) {
                     tiles[x][y] = Tileset.NOTHING;
