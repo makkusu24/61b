@@ -10,23 +10,42 @@ import tileengine.Tileset;
 public class KnightWorld {
 
     private TETile[][] tiles;
-    private int holeSize;
 
     public KnightWorld(int width, int height, int holeSize) {
-        this.holeSize = holeSize;
         TETile[][] tiles = new TETile[width][height];
+        this.tiles = tiles;
+        int denom = 5 * holeSize;
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                if ((x % (holeSize * 2) == 0 && y % (holeSize * 2) == 0)
-                        || (x % (holeSize * 2) == holeSize && y % (holeSize * 2) == holeSize)) {
-                    tiles[x][y] = Tileset.NOTHING;
+                if ((x % denom == 0 * holeSize && y % denom == 1 * holeSize) || (x % denom == 1 * holeSize && y % denom == 4 * holeSize) ||
+                        (x % denom == 2 * holeSize && y % denom == 2 * holeSize) || (x % denom == 3 * holeSize && y % denom == 0 * holeSize)
+                        || (x % denom == 4 * holeSize && y % denom == 3 * holeSize)) {
+                    //createSquare(x, y, holeSize, Tileset.NOTHING, this.tiles);
+                    for (int axis1 = x; axis1 <= x; axis1++) {
+                        for (int axis2 = y; axis2 <= y; axis2++) {
+                            tiles[axis1][axis2] = Tileset.NOTHING;
+                        }
+                    }
                 } else {
-                    tiles[x][y] = Tileset.FLOWER;
+                    //createSquare(x, y, holeSize, Tileset.FLOWER, this.tiles);
+                    for (int axis1 = x; axis1 <= x; axis1++) {
+                        for (int axis2 = y; axis2 <= y; axis2++) {
+                            tiles[axis1][axis2] = Tileset.FLOWER;
+                        }
+                    }
                 }
             }
         }
-        this.tiles = tiles;
     }
+
+    /**
+    public void createSquare(int x, int y, int holeSize, TETile tile, TETile[][] tiles) {
+        for (int axis1 = x; axis1 < x + holeSize - 1; x++) {
+            for (int axis2 = y; axis2 < y + holeSize - 1; y++) {
+                tiles[axis1][axis2] = tile;
+            }
+        }
+    }*/
 
     /** Returns the tiles associated with this KnightWorld. */
     public TETile[][] getTiles() {
@@ -37,7 +56,7 @@ public class KnightWorld {
         // Change these parameters as necessary
         int width = 50;
         int height = 30;
-        int holeSize = 2;
+        int holeSize = 1;
 
         KnightWorld knightWorld = new KnightWorld(width, height, holeSize);
 
