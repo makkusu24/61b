@@ -62,7 +62,7 @@ public class KnightWorld {
         // Change these parameters as necessary
         int width = 50;
         int height = 30;
-        int holeSize = 3;
+        int holeSize = 4;
 
         KnightWorld knightWorld = new KnightWorld(width, height, holeSize);
 
