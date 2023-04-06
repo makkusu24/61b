@@ -9,7 +9,7 @@ import tileengine.Tileset;
  */
 public class KnightWorld {
 
-    private TETile[][] tiles;
+    private final TETile[][] tiles;
 
     public KnightWorld(int width, int height, int holeSize) {
         TETile[][] tiles = new TETile[width][height];
@@ -17,8 +17,9 @@ public class KnightWorld {
         int denom = 5 * holeSize;
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                if ((x % denom == 0 * holeSize && y % denom == 1 * holeSize) || (x % denom == 1 * holeSize && y % denom == 4 * holeSize) ||
-                        (x % denom == 2 * holeSize && y % denom == 2 * holeSize) || (x % denom == 3 * holeSize && y % denom == 0 * holeSize)
+                if ((x % denom == 0 && y % denom == holeSize) || (x % denom == holeSize && y % denom == 4 * holeSize) ||
+                        (x % denom == 2 * holeSize && y % denom == 2 * holeSize) ||
+                        (x % denom == 3 * holeSize && y % denom == 0)
                         || (x % denom == 4 * holeSize && y % denom == 3 * holeSize)) {
                     //createSquare(x, y, holeSize, Tileset.NOTHING, this.tiles);
                     for (int axis1 = x; axis1 <= x + holeSize - 1; axis1++) {
@@ -30,6 +31,7 @@ public class KnightWorld {
                         }
                     }
                 } else {
+                    //createSquare(x, y, holeSize, Tileset.FLOWER, this.tiles);
                     for (int j = 0; j < width; j++) {
                         for (int i = 0; i < height; i++) {
                             if (tiles[j][i] != Tileset.NOTHING) {
@@ -37,17 +39,6 @@ public class KnightWorld {
                             }
                         }
                     }
-                    /**
-                    //createSquare(x, y, holeSize, Tileset.FLOWER, this.tiles);
-                    for (int axis1 = x; axis1 <= x + holeSize; axis1++) {
-                        for (int axis2 = y; axis2 <= y + holeSize; axis2++) {
-                            if (axis1 > width - 1 || axis2 > height - 1) {
-                                break;
-                            }
-                            tiles[axis1][axis2] = Tileset.FLOWER;
-                        }
-                    }
-                     */
                 }
             }
         }
@@ -69,9 +60,9 @@ public class KnightWorld {
 
     public static void main(String[] args) {
         // Change these parameters as necessary
-        int width = 120;
-        int height = 120;
-        int holeSize = 1;
+        int width = 50;
+        int height = 30;
+        int holeSize = 2;
 
         KnightWorld knightWorld = new KnightWorld(width, height, holeSize);
 
