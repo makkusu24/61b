@@ -21,18 +21,33 @@ public class KnightWorld {
                         (x % denom == 2 * holeSize && y % denom == 2 * holeSize) || (x % denom == 3 * holeSize && y % denom == 0 * holeSize)
                         || (x % denom == 4 * holeSize && y % denom == 3 * holeSize)) {
                     //createSquare(x, y, holeSize, Tileset.NOTHING, this.tiles);
-                    for (int axis1 = x; axis1 <= x; axis1++) {
-                        for (int axis2 = y; axis2 <= y; axis2++) {
+                    for (int axis1 = x; axis1 <= x + holeSize - 1; axis1++) {
+                        for (int axis2 = y; axis2 <= y + holeSize - 1; axis2++) {
+                            if (axis1 > width - 1 || axis2 > height - 1) {
+                                break;
+                            }
                             tiles[axis1][axis2] = Tileset.NOTHING;
                         }
                     }
                 } else {
+                    for (int j = 0; j < width; j++) {
+                        for (int i = 0; i < height; i++) {
+                            if (tiles[j][i] != Tileset.NOTHING) {
+                                tiles[j][i] = Tileset.FLOWER;
+                            }
+                        }
+                    }
+                    /**
                     //createSquare(x, y, holeSize, Tileset.FLOWER, this.tiles);
-                    for (int axis1 = x; axis1 <= x; axis1++) {
-                        for (int axis2 = y; axis2 <= y; axis2++) {
+                    for (int axis1 = x; axis1 <= x + holeSize; axis1++) {
+                        for (int axis2 = y; axis2 <= y + holeSize; axis2++) {
+                            if (axis1 > width - 1 || axis2 > height - 1) {
+                                break;
+                            }
                             tiles[axis1][axis2] = Tileset.FLOWER;
                         }
                     }
+                     */
                 }
             }
         }
@@ -54,8 +69,8 @@ public class KnightWorld {
 
     public static void main(String[] args) {
         // Change these parameters as necessary
-        int width = 50;
-        int height = 30;
+        int width = 120;
+        int height = 120;
         int holeSize = 1;
 
         KnightWorld knightWorld = new KnightWorld(width, height, holeSize);
