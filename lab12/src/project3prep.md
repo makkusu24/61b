@@ -11,7 +11,7 @@ drawing a knight world and randomly generating a world
 using rooms and hallways?**
 
 Answer: Drawing a knight world is like baking a macaron where we need to follow all the same steps in order to get a "pie"; 
-if the algorithm is off (like too much egg white or flour) then the proportions are off and the textures are off and it's no longer
+if the algorithm is off (like too much egg white or flour) then the proportions are off and the textures are off, and it's no longer
 a macaron.
 However, drawing a randomly generated world with rooms and hallways is like making beef stew. You can add a lot of beef with few
 potatoes or a lot of potatoes with a little beef; at the end of the day it's still going to be and taste like beef stew. 
