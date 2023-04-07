@@ -60,9 +60,9 @@ public class KnightWorld {
 
     public static void main(String[] args) {
         // Change these parameters as necessary
-        int width = 50;
-        int height = 30;
-        int holeSize = 4;
+        int width = 70;
+        int height = 70;
+        int holeSize = 2;
 
         KnightWorld knightWorld = new KnightWorld(width, height, holeSize);
 
