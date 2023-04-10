@@ -58,7 +58,7 @@ public class MemoryGame {
 
     public String generateRandomString(int n) {
         String returnString = "";
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i += 1) {
             Character addChar = CHARACTERS[rand.nextInt(26)];
             returnString = returnString + addChar;
         }
@@ -92,18 +92,29 @@ public class MemoryGame {
         StdDraw.show();
     }
 
-    public void flashSequence(String letters) { 
+    public void flashSequence(String letters) {
         for (char letter : letters.toCharArray()) {
             drawFrame(String.valueOf(letter));
             StdDraw.pause(1000);
-            StdDraw.clear();
+            StdDraw.clear(Color.BLACK);
             StdDraw.pause(500);
         }
     }
 
     public String solicitNCharsInput(int n) {
-        //TODO: Read n letters of player input
-        return null;
+        String typedString = "";
+        int counter = 0;
+        while (StdDraw.hasNextKeyTyped()) {
+            if (counter >= n) {
+                break;
+            }
+            Character currentChar = StdDraw.nextKeyTyped();
+            typedString = typedString + currentChar;
+            StdDraw.clear(Color.BLACK);
+            drawFrame(typedString);
+            counter += 1;
+        }
+        return typedString;
     }
 
     public void startGame() {
