@@ -104,15 +104,17 @@ public class MemoryGame {
     public String solicitNCharsInput(int n) {
         String typedString = "";
         int counter = 0;
-        while (StdDraw.hasNextKeyTyped()) {
+        while (playerTurn) {
             if (counter >= n) {
-                break;
+                playerTurn = false;
             }
-            Character currentChar = StdDraw.nextKeyTyped();
-            typedString = typedString + currentChar;
-            StdDraw.clear(Color.BLACK);
-            drawFrame(typedString);
-            counter += 1;
+            if (StdDraw.hasNextKeyTyped()) {
+                Character currentChar = StdDraw.nextKeyTyped();
+                typedString = typedString + currentChar;
+                StdDraw.clear(Color.BLACK);
+                drawFrame(typedString);
+                counter += 1;
+            }
         }
         return typedString;
     }
@@ -123,7 +125,6 @@ public class MemoryGame {
         this.playerTurn = false;
 
         while (!gameOver) {
-            this.playerTurn = false;
             drawFrame("Round: " + this.round);
             StdDraw.pause(1500);
             String displayString = generateRandomString(this.round);
