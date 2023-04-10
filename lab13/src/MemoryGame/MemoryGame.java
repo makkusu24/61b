@@ -125,12 +125,11 @@ public class MemoryGame {
         while (!gameOver) {
             this.playerTurn = false;
             drawFrame("Round: " + this.round);
-            StdDraw.pause(3000);
+            StdDraw.pause(1500);
             String displayString = generateRandomString(this.round);
             flashSequence(displayString);
             this.playerTurn = true;
-            String input = solicitNCharsInput(this.round);
-            if (input == displayString) {
+            if (solicitNCharsInput(this.round) == displayString) {
                 this.round += 1;
             }
             else {
