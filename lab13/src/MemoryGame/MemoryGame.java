@@ -5,6 +5,7 @@ import edu.princeton.cs.algs4.StdDraw;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Objects;
 import java.util.Random;
 
 public class MemoryGame {
@@ -130,7 +131,7 @@ public class MemoryGame {
             String displayString = generateRandomString(this.round);
             flashSequence(displayString);
             this.playerTurn = true;
-            if (solicitNCharsInput(this.round) == displayString) {
+            if (Objects.equals(solicitNCharsInput(this.round), displayString)) {
                 this.round += 1;
             }
             else {
