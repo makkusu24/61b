@@ -118,13 +118,25 @@ public class MemoryGame {
     }
 
     public void startGame() {
-        //TODO: Set any relevant variables before the game starts
+        this.round = 1;
         this.gameOver = false;
+        this.playerTurn = false;
 
-        //TODO: Establish Engine loop
         while (!gameOver) {
-            drawFrame("You should implement this game!");
-            StdDraw.pause(1000);
+            this.playerTurn = false;
+            drawFrame("Round: " + this.round);
+            StdDraw.pause(3000);
+            String displayString = generateRandomString(this.round);
+            flashSequence(displayString);
+            this.playerTurn = true;
+            String input = solicitNCharsInput(this.round);
+            if (input == displayString) {
+                this.round += 1;
+            }
+            else {
+                gameOver = true;
+            }
+
         }
 
         this.drawFrame("Game Over! You made it to round: " + this.round);
