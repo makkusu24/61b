@@ -1,9 +1,7 @@
 package byow.Core;
 
-import byow.TileEngine.TERenderer;
 import byow.TileEngine.TETile;
 import byow.TileEngine.Tileset;
-import byow.Core.Point;
 
 import java.util.*;
 
@@ -50,7 +48,8 @@ public class WorldGenerator {
             int roomY = seed.nextInt(height - roomHeight - 1) + 1;
             int separationX = 2;
             int separationY = 2;
-            if (isRoomValid(roomX - separationX, roomY - separationY, roomWidth + separationX * 2, roomHeight + separationY * 2)) {
+            if (isRoomValid(roomX - separationX, roomY - separationY,
+                    roomWidth + separationX * 2, roomHeight + separationY * 2)) {
                 createRoom(roomX, roomY, roomWidth, roomHeight);
                 rooms.add(new int[] {roomX, roomY, roomWidth, roomHeight});
             }
